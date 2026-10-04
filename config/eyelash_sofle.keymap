@@ -144,21 +144,21 @@
             tap-ms = <40>;
             bindings = <&kp LC(B) &kp L>;
         };
-        /* Split right: prefix+v. */
+        /* Split right: prefix+% (tmux default; % is Shift+5, LS(N5)). */
         tm_split_right: tm_split_right {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp V>;
+            bindings = <&kp LC(B) &kp LS(N5)>;
         };
-        /* Split down: prefix+- . */
+        /* Split down: prefix+" (tmux default; " is Shift+', LS(SQT)). LS is pressed by the macro itself. */
         tm_split_down: tm_split_down {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp MINUS>;
+            bindings = <&kp LC(B) &kp LS(SQT)>;
         };
         /* New tab: prefix+c. */
         tm_new_tab: tm_new_tab {
@@ -271,7 +271,7 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        /* Y = split right (prefix+v); Shift+Y = split down (prefix+-). */
+        /* Y = split right (prefix+%); Shift+Y = split down (prefix+"). */
         tm_split: tm_split {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
