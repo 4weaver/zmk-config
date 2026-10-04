@@ -9,6 +9,10 @@
  *   spare, spare, Esc, Space/Nav, Tab/Tmux
  *   Enter/Sym, Backspace/Num, Del/Fun, Eyelash 1, Eyelash 2
  *
+ * TMUX layer (hold Tab): every action is the Ctrl-b prefix plus a key —
+ * H/J/K/L panes, Y split right (Shift+Y down), I new tab (Shift+I close
+ * pane), B zoom, N/M next/previous tab.
+ *
  * Clipboard macros send Ctrl, matching the previous Lily58 keymap.
  */
 
@@ -20,7 +24,7 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 
-/* ── Layer indices ─────────────────────────────────────────────── */
+/* ── Layer indices ────────────────────────────────────────────────── */
 #define U_BASE   0
 #define U_TAP    1
 #define U_BUTTON 2
@@ -35,18 +39,18 @@
 #define U_EYE1   11
 #define U_EYE2   12
 
-/* ── Mouse defaults ────────────────────────────────────────────── */
+/* ── Mouse defaults ───────────────────────────────────────────────── */
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 1250
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
-/* ── Clipboard (Windows) ───────────────────────────────────────── */
+/* ── Clipboard (Windows) ──────────────────────────────────────────── */
 #define U_RDO &kp LC(Y)
 #define U_PST &kp LC(V)
 #define U_CPY &kp LC(C)
 #define U_CUT &kp LC(X)
 #define U_UND &kp LC(Z)
 
-/* ── Mouse key aliases ─────────────────────────────────────────── */
+/* ── Mouse key aliases ────────────────────────────────────────────── */
 #define U_BTN1 &mkp MB1
 #define U_BTN2 &mkp MB2
 #define U_BTN3 &mkp MB3
@@ -59,14 +63,14 @@
 #define U_WH_R &msc SCRL_RIGHT
 #define U_WH_U &msc SCRL_UP
 
-/* ── Mouse movement tuning ─────────────────────────────────────── */
+/* ── Mouse movement tuning ────────────────────────────────────────── */
 &mmv {
     acceleration-exponent = <1>;
     time-to-max-speed-ms = <1500>;
     delay-ms = <0>;
 };
 
-/* ── Macros ────────────────────────────────────────────────────── */
+/* ── Macros ───────────────────────────────────────────────────────── */
 / {
     scroll_enc: scroll_enc {
         compatible = "zmk,behavior-sensor-rotate";
@@ -105,62 +109,57 @@
             wait-ms = <0>;
             bindings = <&bt BT_SEL 4 &bt BT_CLR>;
         };
-
-        /* TMUX layer — tmux and herdr actions. Both use Ctrl-b as the prefix,
-           so every binding sends the prefix as its own tap, then the action
-           key: both want the prefix RELEASED before that key, so these must be
-           two taps and never a three-key chord. Trimmed to the herdr actions
-           actually used: workspaces on H/L, tab prev/next on J/K, new tab on
-           N, the picker on P, hop and copy mode on U/I. 40/40 is a starting
-           point — if the prefix is swallowed, raise it (80–120).
-           Host-side binds needed in herdr (config.toml): next_workspace /
-           previous_workspace on prefix+l / prefix+h, hop on prefix+a, copy
-           mode on prefix+[; and prompt_new_tab_name = false under [ui]. */
-        /* Workspace prev/next: herdr prefix+h / prefix+l. */
-        tm_ws_prev: tm_ws_prev {
+        /* TMUX layer — tmux actions. Every binding is the Ctrl-b prefix plus
+           one key, sent as two separate taps: tmux wants the prefix RELEASED
+           before the action key, so these must never be a three-key chord.
+           40/40 is a starting point — if the prefix is swallowed, raise it
+           (80–120). */
+        /* Pane focus: prefix+h/j/k/l. */
+        tm_pane_left: tm_pane_left {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
             bindings = <&kp LC(B) &kp H>;
         };
-        tm_ws_next: tm_ws_next {
+        tm_pane_down: tm_pane_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp J>;
+        };
+        tm_pane_up: tm_pane_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp K>;
+        };
+        tm_pane_right: tm_pane_right {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
             bindings = <&kp LC(B) &kp L>;
         };
-        /* Hop: a hop-style path picker, herdr prefix+a. */
-        tm_hop: tm_hop {
+        /* Split right: prefix+v. */
+        tm_split_right: tm_split_right {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp A>;
+            bindings = <&kp LC(B) &kp V>;
         };
-        /* Copy mode: herdr prefix+[ . */
-        tm_copy: tm_copy {
+        /* Split down: prefix+- . */
+        tm_split_down: tm_split_down {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp LBKT>;
+            bindings = <&kp LC(B) &kp MINUS>;
         };
-        tm_tab_next: tm_tab_next {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
-            bindings = <&kp LC(B) &kp N>;
-        };
-        tm_tab_prev: tm_tab_prev {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
-            bindings = <&kp LC(B) &kp P>;
-        };
+        /* New tab: prefix+c. */
         tm_new_tab: tm_new_tab {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -168,17 +167,42 @@
             tap-ms = <40>;
             bindings = <&kp LC(B) &kp C>;
         };
-        tm_overview: tm_overview {
+        /* Close pane: prefix+x. */
+        tm_close_pane: tm_close_pane {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp W>;
+            bindings = <&kp LC(B) &kp X>;
+        };
+        /* Zoom pane: prefix+z. */
+        tm_zoom: tm_zoom {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp Z>;
+        };
+        /* Next tab: prefix+n. */
+        tm_tab_next: tm_tab_next {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp N>;
+        };
+        /* Previous tab: prefix+p. */
+        tm_tab_prev: tm_tab_prev {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp P>;
         };
     };
 };
 
-/* ── Behaviors ─────────────────────────────────────────────────── */
+/* ── Behaviors ────────────────────────────────────────────────────── */
 / {
     behaviors {
         /* Home-row mods. Tap-preferred so a roll still types the letter. */
@@ -190,7 +214,6 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-
         /* Hold = momentary layer, tap = key. */
         u_lt: u_lt {
             compatible = "zmk,behavior-hold-tap";
@@ -200,7 +223,6 @@
             flavor = "tap-preferred";
             bindings = <&mo>, <&kp>;
         };
-
         u_bt_sel_0: u_bt_sel_0 {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -231,21 +253,46 @@
             bindings = <&bt BT_SEL 4>, <&u_macro_u_bt_sel_4>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
         u_out_tog: u_out_tog {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&out OUT_TOG>, <&out OUT_USB>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
         u_caps_word: u_caps_word {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&caps_word>, <&kp CAPS>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
+        /* Y = split right (prefix+v); Shift+Y = split down (prefix+-). */
+        tm_split: tm_split {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&tm_split_right>, <&tm_split_down>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        /* I = new tab (prefix+c); Shift+I = close pane (prefix+x). */
+        tm_new_close: tm_new_close {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&tm_new_tab>, <&tm_close_pane>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        /* Up, or Page Up while Alt is held (Alt is not sent). */
+        u_up_pg: u_up_pg {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp UP>, <&kp PG_UP>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        /* Down, or Page Down while Alt is held (Alt is not sent). */
+        u_down_pg: u_down_pg {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DOWN>, <&kp PG_DN>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
         /* Double-tap guards: require a second tap to lock a layer. */
         u_to_U_BASE: u_to_U_BASE {
             compatible = "zmk,behavior-tap-dance";
@@ -307,7 +354,6 @@
             tapping-term-ms = <200>;
             bindings = <&none>, <&to U_WM>;
         };
-
         /* Esc tap, double-tap leaves the Tap layer. */
         u_esc_to_base: u_esc_to_base {
             compatible = "zmk,behavior-tap-dance";
@@ -326,11 +372,11 @@
         BASE {
             display-name = "Base";
             bindings = <
-&kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5   &kp UP    &kp N6  &kp N7  &kp N8  &kp N9  &kp N0    &kp MINUS
-&kp TAB    &kp Q   &kp W   &kp E   &kp R   &kp T    &kp DOWN  &kp Y   &kp U   &kp I   &kp O   &kp P     &kp EQUAL
-&kp LSHFT  &u_mt LGUI A  &u_mt LALT S  &u_mt LSHFT D  &u_mt LCTRL F  &kp G   &kp LEFT  &kp H  &u_mt RCTRL J  &u_mt RSHFT K  &u_mt RALT L  &u_mt RGUI SEMI  &kp SQT
-&kp LCTRL  &kp Z  &kp X  &kp COMMA  &kp C  &kp V   &kp RIGHT  &kp B  &kp N  &kp M  &kp DOT  &u_lt U_BUTTON SLASH  &kp BSLH
-&kp C_MUTE &none &none &kp ESC &u_lt U_NAV SPACE &u_lt U_TMUX TAB  &none  &u_lt U_SYM RET &u_lt U_NUM BSPC &u_lt U_FUN DEL &mo U_EYE1 &mo U_EYE2
+&kp GRAVE  &kp N1       &kp N2       &kp N3        &kp N4            &kp N5            &kp UP     &kp N6          &kp N7           &kp N8          &kp N9       &kp N0               &kp MINUS
+&kp TAB    &kp Q        &kp W        &kp E         &kp R             &kp T             &kp DOWN   &kp Y           &kp U            &kp I           &kp O        &kp P                &kp EQUAL
+&kp LSHFT  &u_mt LGUI A &u_mt LALT S &u_mt LSHFT D &u_mt LCTRL F     &kp G             &kp LEFT   &kp H           &u_mt RCTRL J    &u_mt RSHFT K   &u_mt RALT L &u_mt RGUI SEMI      &kp SQT
+&kp LCTRL  &kp Z        &kp X        &kp COMMA     &kp C             &kp V             &kp RIGHT  &kp B           &kp N            &kp M           &kp DOT      &u_lt U_BUTTON SLASH &kp BSLH
+&kp C_MUTE &none        &none        &kp ESC       &u_lt U_NAV SPACE &u_lt U_TMUX TAB  &none      &u_lt U_SYM RET &u_lt U_NUM BSPC &u_lt U_FUN DEL &mo U_EYE1   &mo U_EYE2
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -339,11 +385,11 @@
         TAP {
             display-name = "Tap";
             bindings = <
-&kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5  &kp UP    &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS
-&kp TAB   &kp Q  &kp W  &kp E  &kp R  &kp T   &kp DOWN  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp EQUAL
-&kp LSHFT &kp A  &kp S  &kp D  &kp F  &kp G   &kp LEFT  &kp H  &kp J  &kp K  &kp L  &kp SEMI &kp SQT
-&kp LCTRL &kp Z &kp X &kp COMMA &kp C &kp V  &kp RIGHT &kp B &kp N &kp M &kp DOT &kp SLASH &kp BSLH
-&kp C_MUTE &none &none &u_esc_to_base &kp SPACE &kp TAB  &none  &kp RET &kp BSPC &kp DEL &none &none
+&kp GRAVE  &kp N1 &kp N2 &kp N3         &kp N4    &kp N5   &kp UP     &kp N6  &kp N7   &kp N8  &kp N9  &kp N0    &kp MINUS
+&kp TAB    &kp Q  &kp W  &kp E          &kp R     &kp T    &kp DOWN   &kp Y   &kp U    &kp I   &kp O   &kp P     &kp EQUAL
+&kp LSHFT  &kp A  &kp S  &kp D          &kp F     &kp G    &kp LEFT   &kp H   &kp J    &kp K   &kp L   &kp SEMI  &kp SQT
+&kp LCTRL  &kp Z  &kp X  &kp COMMA      &kp C     &kp V    &kp RIGHT  &kp B   &kp N    &kp M   &kp DOT &kp SLASH &kp BSLH
+&kp C_MUTE &none  &none  &u_esc_to_base &kp SPACE &kp TAB  &none      &kp RET &kp BSPC &kp DEL &none   &none
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -352,11 +398,11 @@
         BUTTON {
             display-name = "Button";
             bindings = <
-&none &none &none &none &none &none  &trans  &none &none &none &none &none &none
-&none U_UND U_CUT U_CPY U_PST U_RDO  &trans  U_RDO U_PST U_CPY U_CUT U_UND &none
-&none &kp LCTRL &kp LALT &kp LCTRL &kp LSHFT &none  &trans  &none &kp LSHFT &kp LCTRL &kp LALT &kp LCTRL &none
-&none U_UND U_CUT U_CPY U_PST U_RDO  &trans  U_RDO U_PST U_CPY U_CUT U_UND &none
-&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+&none  &none     &none    &none     &none     &none   &trans  &none  &none     &none     &none    &none     &none
+&none  U_UND     U_CUT    U_CPY     U_PST     U_RDO   &trans  U_RDO  U_PST     U_CPY     U_CUT    U_UND     &none
+&none  &kp LCTRL &kp LALT &kp LCTRL &kp LSHFT &none   &trans  &none  &kp LSHFT &kp LCTRL &kp LALT &kp LCTRL &none
+&none  U_UND     U_CUT    U_CPY     U_PST     U_RDO   &trans  U_RDO  U_PST     U_CPY     U_CUT    U_UND     &none
+&trans &trans    &trans   &trans    &trans    &trans  &trans  &trans &trans    &trans    &trans   &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -365,11 +411,11 @@
         NAV {
             display-name = "Nav";
             bindings = <
-&trans &trans &trans &trans &trans &trans  &trans  &u_to_U_TAP &u_caps_word &none &none &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &kp LBKT &kp LBRC &kp RBRC &kp RBKT &none &trans
-&trans &trans &trans &trans &trans &trans  &trans  &kp LEFT &kp DOWN &kp UP &kp RIGHT &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &kp HOME &kp PG_DN &kp PG_UP &kp END &trans &trans
-&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans  &trans  &u_to_U_TAP &u_caps_word &none     &none     &none  &none
+&trans &trans &trans &trans &trans &trans  &trans  &kp LBKT    &kp LBRC     &kp RBRC  &kp RBKT  &none  &trans
+&trans &trans &trans &trans &trans &trans  &trans  &kp LEFT    &u_down_pg   &u_up_pg  &kp RIGHT &none  &none
+&trans &trans &trans &trans &trans &trans  &trans  &kp HOME    &kp PG_DN    &kp PG_UP &kp END   &trans &trans
+&trans &trans &trans &trans &trans &trans  &trans  &trans      &trans       &trans    &trans    &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -378,11 +424,11 @@
         MOUSE {
             display-name = "Mouse";
             bindings = <
-&none &none &none &none &none &none  &mmv MOVE_UP  &none &none &none &none &none &none
-&none &bootloader &u_to_U_TAP &none &u_to_U_BASE &none  &mmv MOVE_DOWN  U_RDO U_PST U_CPY U_CUT U_UND &none
-&none &kp LCTRL &kp LALT &kp LCTRL &kp LSHFT &none  &mmv MOVE_LEFT  &none U_MS_L U_MS_D U_MS_U U_MS_R &none
-&none &none &kp RALT &u_to_U_SYM &u_to_U_MOUSE &none  &mmv MOVE_RIGHT  &none U_WH_L U_WH_D U_WH_U U_WH_R &none
-&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+&none  &none       &none       &none       &none         &none   &mmv MOVE_UP     &none  &none  &none  &none  &none  &none
+&none  &bootloader &u_to_U_TAP &none       &u_to_U_BASE  &none   &mmv MOVE_DOWN   U_RDO  U_PST  U_CPY  U_CUT  U_UND  &none
+&none  &kp LCTRL   &kp LALT    &kp LCTRL   &kp LSHFT     &none   &mmv MOVE_LEFT   &none  U_MS_L U_MS_D U_MS_U U_MS_R &none
+&none  &none       &kp RALT    &u_to_U_SYM &u_to_U_MOUSE &none   &mmv MOVE_RIGHT  &none  U_WH_L U_WH_D U_WH_U U_WH_R &none
+&trans &trans      &trans      &trans      &trans        &trans  &trans           &trans &trans &trans &trans &trans
             >;
             sensor-bindings = <&scroll_enc>;
         };
@@ -391,11 +437,11 @@
         MEDIA {
             display-name = "Media";
             bindings = <
-&none &studio_unlock &none &none &none &none  &trans  &none &none &none &none &none &none
-&none &bootloader &u_to_U_TAP &none &u_to_U_BASE &none  &trans  &none &none &none &none &none &none
-&none &kp LCTRL &kp LALT &kp LCTRL &kp LSHFT &none  &trans  &none &kp C_PREV &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &none
-&none &none &kp RALT &u_to_U_FUN &u_to_U_MEDIA &none  &trans  &u_out_tog &u_bt_sel_0 &u_bt_sel_1 &u_bt_sel_2 &u_bt_sel_3 &none
-&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+&none  &studio_unlock &none       &none       &none         &none   &trans  &none      &none       &none        &none        &none       &none
+&none  &bootloader    &u_to_U_TAP &none       &u_to_U_BASE  &none   &trans  &none      &none       &none        &none        &none       &none
+&none  &kp LCTRL      &kp LALT    &kp LCTRL   &kp LSHFT     &none   &trans  &none      &kp C_PREV  &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT  &none
+&none  &none          &kp RALT    &u_to_U_FUN &u_to_U_MEDIA &none   &trans  &u_out_tog &u_bt_sel_0 &u_bt_sel_1  &u_bt_sel_2  &u_bt_sel_3 &none
+&trans &trans         &trans      &trans      &trans        &trans  &trans  &trans     &trans      &trans       &trans       &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -404,11 +450,11 @@
         NUM {
             display-name = "Num";
             bindings = <
-&none &none &none &none &none &none  &trans  &none &none &none &none &none &none
-&none &kp LBKT &kp N7 &kp N8 &kp N9 &kp RBKT  &trans  &none &u_to_U_BASE &none &u_to_U_TAP &bootloader &none
-&none &kp SEMI &kp N4 &kp N5 &kp N6 &kp EQUAL  &trans  &none &kp LSHFT &kp LCTRL &kp LALT &kp LCTRL &none
-&none &kp GRAVE &kp N1 &kp N2 &kp N3 &kp BSLH  &trans  &none &u_to_U_NUM &u_to_U_NAV &kp RALT &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+&none  &none     &none  &none  &none  &none      &trans  &none  &none        &none       &none       &none       &none
+&none  &kp LBKT  &kp N7 &kp N8 &kp N9 &kp RBKT   &trans  &none  &u_to_U_BASE &none       &u_to_U_TAP &bootloader &none
+&none  &kp SEMI  &kp N4 &kp N5 &kp N6 &kp EQUAL  &trans  &none  &kp LSHFT    &kp LCTRL   &kp LALT    &kp LCTRL   &none
+&none  &kp GRAVE &kp N1 &kp N2 &kp N3 &kp BSLH   &trans  &none  &u_to_U_NUM  &u_to_U_NAV &kp RALT    &none       &none
+&trans &trans    &trans &trans &trans &trans     &trans  &trans &trans       &trans      &trans      &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -417,11 +463,11 @@
         SYM {
             display-name = "Sym";
             bindings = <
-&none &none &none &none &none &none  &trans  &trans &trans &trans &trans &trans &trans
-&trans &none &none &kp ASTRK &kp AMPS &none  &trans  &trans &trans &trans &trans &trans &trans
-&trans &kp DQT &kp CARET &kp PRCNT &kp DLLR &kp PLUS  &trans  &trans &trans &trans &trans &trans &trans
-&trans &kp TILDE &kp HASH &kp AT &kp EXCL &kp PIPE  &trans  &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+&none  &none     &none     &none     &none    &none     &trans  &trans &trans &trans &trans &trans &trans
+&trans &none     &none     &kp ASTRK &kp AMPS &none     &trans  &trans &trans &trans &trans &trans &trans
+&trans &kp DQT   &kp CARET &kp PRCNT &kp DLLR &kp PLUS  &trans  &trans &trans &trans &trans &trans &trans
+&trans &kp TILDE &kp HASH  &kp AT    &kp EXCL &kp PIPE  &trans  &trans &trans &trans &trans &trans &trans
+&trans &trans    &trans    &trans    &trans   &trans    &trans  &trans &trans &trans &trans &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -430,11 +476,11 @@
         FUN {
             display-name = "Fun";
             bindings = <
-&bootloader &none &none &none &none &none  &trans  &none &none &none &none &none &none
-&none &kp F12 &kp F7 &kp F8 &kp F9 &kp PSCRN  &trans  &none &u_to_U_BASE &none &u_to_U_TAP &bootloader &none
-&none &kp F11 &kp F4 &kp F5 &kp F6 &kp SLCK  &trans  &none &kp LSHFT &kp LCTRL &kp LALT &kp LCTRL &none
-&none &kp F10 &kp F1 &kp F2 &kp F3 &kp PAUSE_BREAK  &trans  &none &u_to_U_FUN &u_to_U_MEDIA &kp RALT &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+&bootloader &none   &none  &none  &none  &none            &trans  &none  &none        &none         &none       &none       &none
+&none       &kp F12 &kp F7 &kp F8 &kp F9 &kp PSCRN        &trans  &none  &u_to_U_BASE &none         &u_to_U_TAP &bootloader &none
+&none       &kp F11 &kp F4 &kp F5 &kp F6 &kp SLCK         &trans  &none  &kp LSHFT    &kp LCTRL     &kp LALT    &kp LCTRL   &none
+&none       &kp F10 &kp F1 &kp F2 &kp F3 &kp PAUSE_BREAK  &trans  &none  &u_to_U_FUN  &u_to_U_MEDIA &kp RALT    &none       &none
+&trans      &trans  &trans &trans &trans &trans           &trans  &trans &trans       &trans        &trans      &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -443,27 +489,27 @@
         WM {
             display-name = "WM";
             bindings = <
-&none &none &none &none &none &none  &trans  &none &none &none &none &none &none
-&none &kp LA(LBKT) &kp LA(N7) &kp LA(N8) &kp LA(N9) &kp LA(RBKT)  &trans  &none &kp LA(DOT) &kp LA(N0) &kp LA(MINUS) &none &none
-&none &kp LA(SEMI) &kp LA(N4) &kp LA(N5) &kp LA(N6) &kp LA(EQUAL)  &trans  &none &kp LA(H) &kp LA(J) &kp LA(K) &kp LA(L) &none
-&none &kp LA(GRAVE) &kp LA(N1) &kp LA(N2) &kp LA(N3) &kp LA(BSLH)  &trans  &none &kp LA(ESC) &u_to_U_NAV &kp RALT &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+&none  &none         &none      &none      &none      &none          &trans  &none  &none       &none       &none         &none     &none
+&none  &kp LA(LBKT)  &kp LA(N7) &kp LA(N8) &kp LA(N9) &kp LA(RBKT)   &trans  &none  &kp LA(DOT) &kp LA(N0)  &kp LA(MINUS) &none     &none
+&none  &kp LA(SEMI)  &kp LA(N4) &kp LA(N5) &kp LA(N6) &kp LA(EQUAL)  &trans  &none  &kp LA(H)   &kp LA(J)   &kp LA(K)     &kp LA(L) &none
+&none  &kp LA(GRAVE) &kp LA(N1) &kp LA(N2) &kp LA(N3) &kp LA(BSLH)   &trans  &none  &kp LA(ESC) &u_to_U_NAV &kp RALT      &none     &none
+&trans &trans        &trans     &trans     &trans     &trans         &trans  &trans &trans      &trans      &trans        &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        /* 10: TMUX — tmux/herdr actions. Hold Tab. Left hand falls through, so
-           typing continues. Trimmed to the herdr actions in use: H/L switch
-           workspace, J/K move between tabs, N opens a tab, P is the picker,
-           U hops, I enters copy mode. */
+        /* 10: TMUX — tmux actions, each Ctrl-b prefix + key. Hold Tab. Left hand
+           falls through, so typing continues. H/J/K/L move between panes,
+           Y splits right (Shift+Y down), I opens a tab (Shift+I closes the
+           pane), B zooms, N/M go to next/previous tab. Everything else is none. */
         TMUX {
             display-name = "Tmux";
             bindings = <
-&trans &trans &trans &trans &trans &trans  &trans  &none &none &none &none &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &none &tm_hop &tm_copy &none &tm_overview &none
-&trans &trans &trans &trans &trans &trans  &trans  &tm_ws_prev &tm_tab_next &tm_tab_prev &tm_ws_next &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &none &tm_new_tab &none &none &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans  &trans  &none         &none         &none         &none          &none  &none
+&trans &trans &trans &trans &trans &trans  &trans  &tm_split     &none         &tm_new_close &none          &none  &none
+&trans &trans &trans &trans &trans &trans  &trans  &tm_pane_left &tm_pane_down &tm_pane_up   &tm_pane_right &none  &none
+&trans &trans &trans &trans &trans &trans  &trans  &tm_zoom      &tm_tab_next  &tm_tab_prev  &none          &none  &none
+&trans &trans &trans &trans &trans &trans  &trans  &trans        &trans        &trans        &trans         &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -472,11 +518,11 @@
         EYE1 {
             display-name = "Eye1";
             bindings = <
-&kp GRAVE  &kp F1     &kp F2          &kp F3           &kp F4           &kp F5           &mmv MOVE_UP     &kp F6           &kp F7           &kp F8      &kp F9     &kp F10           &trans
-&trans     &kp GRAVE  &mkp LCLK       &mkp MCLK        &mkp RCLK        &mkp MB4         &mmv MOVE_DOWN   &kp PG_UP        &kp END          &kp UP      &kp HOME   &kp MINUS         &kp EQUAL
-&trans     &kp TILDE  &trans          &trans           &trans           &mkp MB5         &mmv MOVE_LEFT   &kp PG_DN        &kp LEFT         &kp DOWN    &kp RIGHT  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
-&trans     &rgb_ug RGB_OFF &rgb_ug RGB_ON &rgb_ug RGB_EFF &rgb_ug RGB_EFR &rgb_ug RGB_SPI &mmv MOVE_RIGHT &rgb_ug RGB_BRI &rgb_ug RGB_BRD &kp INSERT &kp F11 &kp F12 &trans
-&kp C_MUTE &trans &trans &trans &trans &trans  &mkp LCLK  &trans &trans &trans &trans &trans
+&kp GRAVE  &kp F1          &kp F2         &kp F3          &kp F4          &kp F5           &mmv MOVE_UP     &kp F6          &kp F7          &kp F8     &kp F9    &kp F10          &trans
+&trans     &kp GRAVE       &mkp LCLK      &mkp MCLK       &mkp RCLK       &mkp MB4         &mmv MOVE_DOWN   &kp PG_UP       &kp END         &kp UP     &kp HOME  &kp MINUS        &kp EQUAL
+&trans     &kp TILDE       &trans         &trans          &trans          &mkp MB5         &mmv MOVE_LEFT   &kp PG_DN       &kp LEFT        &kp DOWN   &kp RIGHT &kp LEFT_BRACKET &kp RIGHT_BRACKET
+&trans     &rgb_ug RGB_OFF &rgb_ug RGB_ON &rgb_ug RGB_EFF &rgb_ug RGB_EFR &rgb_ug RGB_SPI  &mmv MOVE_RIGHT  &rgb_ug RGB_BRI &rgb_ug RGB_BRD &kp INSERT &kp F11   &kp F12          &trans
+&kp C_MUTE &trans          &trans         &trans          &trans          &trans           &mkp LCLK        &trans          &trans          &trans     &trans    &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -485,11 +531,11 @@
         EYE2 {
             display-name = "Eye2";
             bindings = <
-&kp TILDE &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4  &mmv MOVE_UP    &kp F6 &kp F7 &kp F8  &kp F9  &kp F10  &trans
-&trans    &bt BT_CLR   &bt BT_CLR_ALL &trans     &trans       &trans        &mmv MOVE_DOWN  &trans &trans &kp F11 &kp F12 &kp UNDER &kp PLUS
-&trans    &out OUT_USB &out OUT_BLE   &trans     &trans       &trans        &mmv MOVE_LEFT  &trans &trans &trans  &trans  &kp LBRC &kp RBRC
-&trans    &sys_reset   &trans         &bootloader &trans      &trans        &mmv MOVE_RIGHT &trans &trans &sys_reset &soft_off &bootloader &trans
-&trans &trans &trans &trans &trans &trans  &mkp LCLK  &trans &trans &trans &trans &trans
+&kp TILDE &bt BT_SEL 0 &bt BT_SEL 1   &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4  &mmv MOVE_UP     &kp F6 &kp F7 &kp F8     &kp F9    &kp F10     &trans
+&trans    &bt BT_CLR   &bt BT_CLR_ALL &trans       &trans       &trans        &mmv MOVE_DOWN   &trans &trans &kp F11    &kp F12   &kp UNDER   &kp PLUS
+&trans    &out OUT_USB &out OUT_BLE   &trans       &trans       &trans        &mmv MOVE_LEFT   &trans &trans &trans     &trans    &kp LBRC    &kp RBRC
+&trans    &sys_reset   &trans         &bootloader  &trans       &trans        &mmv MOVE_RIGHT  &trans &trans &sys_reset &soft_off &bootloader &trans
+&trans    &trans       &trans         &trans       &trans       &trans        &mkp LCLK        &trans &trans &trans     &trans    &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
