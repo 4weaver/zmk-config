@@ -112,6 +112,11 @@ def legend_of(unit: list[str]):
         return None, None
     if kind in ("u_mt", "mt"):
         return KP_LEGEND.get(args[-1]) if args else None, None
+    # NAV mod-morphs: Up/Down, or PgUp/PgDn with Alt held. Show the plain arrow.
+    if kind == "u_up_pg":
+        return KP_LEGEND["UP"], None
+    if kind == "u_down_pg":
+        return KP_LEGEND["DOWN"], None
     return None, None
 
 

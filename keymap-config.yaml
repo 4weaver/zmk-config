@@ -90,15 +90,32 @@ parse_config:
     "&u_to_U_BUTTON": $$to_btn$$
     "&u_to_U_TMUX": $$to_tmux$$
 
-    # TMUX layer — Ctrl-b prefix (tmux + herdr), see the tm_* macros in the keymap
-    "&tm_ws_prev": "⊟"
-    "&tm_ws_next": "⊞"
-    "&tm_hop": "⤳"
-    "&tm_copy": "⇞"
+    # TMUX layer — Ctrl-b prefix (tmux / herdr / zellij-with-tmux-bindings / tern), see the tm_* macros in the keymap
+    "&tm_pane_left": $$mdi:arrow-left-box$$
+    "&tm_pane_down": $$mdi:arrow-down-box$$
+    "&tm_pane_up": $$mdi:arrow-up-box$$
+    "&tm_pane_right": $$mdi:arrow-right-box$$
+    "&tm_split_right": $$mdi:arrow-split-vertical$$
+    "&tm_split_down": $$mdi:arrow-split-horizontal$$
+    "&tm_close_pane": $$mdi:close-box-outline$$
+    "&tm_zoom": $$mdi:magnify-plus-outline$$
     "&tm_tab_next": "⇥"
     "&tm_tab_prev": "⇤"
     "&tm_new_tab": "+⇥"
-    "&tm_overview": "☰"
+    # Mod-morphs: tap = normal, s = with Shift (tm_*) / Alt held (u_*_pg)
+    "&tm_split":
+      t: $$mdi:arrow-split-vertical$$
+      s: $$mdi:arrow-split-horizontal$$
+    "&tm_new_close":
+      t: "+⇥"
+      s: $$mdi:close-box-outline$$
+    # NAV: Up/Down, Alt held => PgUp/PgDn
+    "&u_up_pg":
+      t: $$mdi:arrow-up$$
+      s: PgUp
+    "&u_down_pg":
+      t: $$mdi:arrow-down$$
+      s: PgDn
 
     # Caps word
     "&u_caps_word": $$mdi:caps-lock$$

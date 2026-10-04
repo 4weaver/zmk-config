@@ -61,13 +61,15 @@ Thumbs, left outer to inner, then right inner to outer:
 | 7 | Sym | Symbols. Hold Enter |
 | 8 | Fun | F-keys. Hold Delete. This is the old function layer, not the Eyelash one |
 | 9 | WM | AeroSpace shortcuts. Nothing opens this layer |
-| 10 | Tmux | tmux/herdr actions (shared Ctrl-b prefix). Hold Tab |
+| 10 | Tmux | tmux-style pane/tab actions (Ctrl-b prefix). Hold Tab |
 | 11 | Eye1 | Vendor lower layer: F-keys, mouse buttons, RGB. Outer right thumb |
 | 12 | Eye2 | Vendor adjust layer: Bluetooth, USB/BLE, reset, bootloader. Outermost right thumb |
 
 The hat sends arrows on Base and Tap, and mouse movement on Mouse, Eye1, and Eye2. Encoder click is mute. Encoder rotation is volume except on Mouse, where it scrolls.
 
-Clipboard macros send Ctrl. TMUX macros send the Ctrl-b prefix as its own tap, then the action key. The layer is trimmed to the herdr actions actually used: right home row H/L switch workspace (`C-b h`/`C-b l`), J/K move between tabs (`C-b n`/`C-b p`, J = next), U hops (`C-b a`, a hop-style path picker), I enters copy mode (`C-b [`), P is the picker (`C-b w`), N opens a tab (`C-b c`). The host side must name the two actions herdr leaves unset — `previous_workspace`/`next_workspace` on `prefix+h`/`prefix+l`; the rest (`copy_mode` on `prefix+[`, `workspace_picker` on `prefix+w`, the tab defaults) already match.
+Clipboard macros send Ctrl. TMUX macros send the Ctrl-b prefix as its own tap, then the action key, so they follow tmux defaults. Right hand: H/J/K/L move pane focus left/down/up/right (`C-b h/j/k/l`); Y splits right (`C-b %`) and Shift+Y splits down (`C-b "`); I opens a new tab (`C-b c`) and Shift+I closes the pane (`C-b x`); B zooms the pane (`C-b z`); N/M go to the next/previous tab (`C-b n`/`C-b p`). It works with tmux, herdr, zellij (with tmux bindings), and tern. herdr leaves the two split actions unset, so its `[keys]` config needs `split_vertical = "prefix+%"` and `split_horizontal = "prefix+\""` (see 4weaver/nixdots PR #2); the other keys match its defaults.
+
+On the Nav layer, the Down and Up keys (home row J/K positions) send PgDn and PgUp while Alt is held (the `u_down_pg`/`u_up_pg` mod-morphs; Alt itself is not sent). Without Alt they are plain Down and Up.
 
 ## Build
 
@@ -81,4 +83,4 @@ just flash-right
 
 On Linux the bootloader drive is `/run/media/$USER/NICENANO`, not `/Volumes/NICENANO`. Flash `settings_reset` on the right half, then the right firmware, then the same pair on the left. The `NICENANO` drive is write-only. Keep a copy of the vendor Actions artifact if you want their stock firmware back.
 
-`just parse` and `just draw` still use the Lily58 keymap-drawer config. The trainer still reads `config/lily58.keymap`. Neither knows this layout yet.
+`just parse` and `just draw` read `config/eyelash_sofle.keymap` with `keymap-config.yaml`. The trainer (`just trainer-gen`, `trainer/tools/gen_board_eyelash.py`) also reads `config/eyelash_sofle.keymap` and writes `trainer/boards/eyelash-sofle.json`.
