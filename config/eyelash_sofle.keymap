@@ -420,9 +420,9 @@
             display-name = "Nav";
             bindings = <
 &trans &trans &trans &trans &trans &trans  &trans  &u_to_U_TAP &u_caps_word &none &none &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &kp LBKT &kp LBRC &kp RBRC &kp RBKT &none &trans
+&trans &trans &trans &trans &trans &trans  &trans  &none &kp LBRC &kp RBRC &none &none &trans
 &trans &trans &trans &trans &trans &trans  &trans  &kp LEFT &u_down_pg &u_up_pg &kp RIGHT &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &kp HOME &kp PG_DN &kp PG_UP &kp END &trans &trans
+&trans &trans &trans &trans &trans &trans  &trans  &kp HOME &kp LBKT &kp RBKT &kp END &trans &trans
 &trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
