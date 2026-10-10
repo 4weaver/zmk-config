@@ -31,6 +31,10 @@
  *     keymap) so the mouse layer is usable without them.
  *   - No sensor-bindings on any layer (no encoder enabled on this build).
  *
+ * TMUX layer (hold Tab): every action is the Ctrl-b prefix plus a key —
+ * H/J/K/L panes, Y split right (Shift+Y down), I new tab (Shift+I close
+ * pane), B zoom, N/M next/previous tab.
+ *
  * Clipboard macros send Ctrl.
  */
 
@@ -119,61 +123,57 @@
             bindings = <&bt BT_SEL 4 &bt BT_CLR>;
         };
 
-        /* TMUX layer — tmux and herdr actions. Both use Ctrl-b as the prefix,
-           so every binding sends the prefix as its own tap, then the action
-           key: both want the prefix RELEASED before that key, so these must be
-           two taps and never a three-key chord. Trimmed to the herdr actions
-           actually used: workspaces on H/L, tab prev/next on J/K, new tab on
-           N, the picker on P, hop and copy mode on U/I. 40/40 is a starting
-           point — if the prefix is swallowed, raise it (80–120).
-           Host-side binds needed in herdr (config.toml): next_workspace /
-           previous_workspace on prefix+l / prefix+h, hop on prefix+a, copy
-           mode on prefix+[; and prompt_new_tab_name = false under [ui]. */
-        /* Workspace prev/next: herdr prefix+h / prefix+l. */
-        tm_ws_prev: tm_ws_prev {
+        /* TMUX layer — tmux actions. Every binding is the Ctrl-b prefix plus
+           one key, sent as two separate taps: tmux wants the prefix RELEASED
+           before the action key, so these must never be a three-key chord.
+           40/40 is a starting point — if the prefix is swallowed, raise it
+           (80–120). */
+        /* Pane focus: prefix+h/j/k/l. */
+        tm_pane_left: tm_pane_left {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
             bindings = <&kp LC(B) &kp H>;
         };
-        tm_ws_next: tm_ws_next {
+        tm_pane_down: tm_pane_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp J>;
+        };
+        tm_pane_up: tm_pane_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp K>;
+        };
+        tm_pane_right: tm_pane_right {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
             bindings = <&kp LC(B) &kp L>;
         };
-        /* Hop: a hop-style path picker, herdr prefix+a. */
-        tm_hop: tm_hop {
+        /* Split right: prefix+% (tmux default; % is Shift+5, LS(N5)). */
+        tm_split_right: tm_split_right {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp A>;
+            bindings = <&kp LC(B) &kp LS(N5)>;
         };
-        /* Copy mode: herdr prefix+[ . */
-        tm_copy: tm_copy {
+        /* Split down: prefix+" (tmux default; " is Shift+', LS(SQT)). LS is pressed by the macro itself. */
+        tm_split_down: tm_split_down {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp LBKT>;
+            bindings = <&kp LC(B) &kp LS(SQT)>;
         };
-        tm_tab_next: tm_tab_next {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
-            bindings = <&kp LC(B) &kp N>;
-        };
-        tm_tab_prev: tm_tab_prev {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
-            bindings = <&kp LC(B) &kp P>;
-        };
+        /* New tab: prefix+c. */
         tm_new_tab: tm_new_tab {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -181,12 +181,37 @@
             tap-ms = <40>;
             bindings = <&kp LC(B) &kp C>;
         };
-        tm_overview: tm_overview {
+        /* Close pane: prefix+x. */
+        tm_close_pane: tm_close_pane {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp W>;
+            bindings = <&kp LC(B) &kp X>;
+        };
+        /* Zoom pane: prefix+z. */
+        tm_zoom: tm_zoom {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp Z>;
+        };
+        /* Next tab: prefix+n. */
+        tm_tab_next: tm_tab_next {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp N>;
+        };
+        /* Previous tab: prefix+p. */
+        tm_tab_prev: tm_tab_prev {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LC(B) &kp P>;
         };
     };
 };
@@ -257,6 +282,35 @@
             #binding-cells = <0>;
             bindings = <&caps_word>, <&kp CAPS>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        /* Y = split right (prefix+%); Shift+Y = split down (prefix+"). */
+        tm_split: tm_split {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&tm_split_right>, <&tm_split_down>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        /* I = new tab (prefix+c); Shift+I = close pane (prefix+x). */
+        tm_new_close: tm_new_close {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&tm_new_tab>, <&tm_close_pane>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        /* Up, or Page Up while Alt is held (Alt is not sent). */
+        u_up_pg: u_up_pg {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp UP>, <&kp PG_UP>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+        /* Down, or Page Down while Alt is held (Alt is not sent). */
+        u_down_pg: u_down_pg {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DOWN>, <&kp PG_DN>;
+            mods = <(MOD_LALT|MOD_RALT)>;
         };
 
         /* Double-tap guards: require a second tap to lock a layer. */
@@ -376,9 +430,9 @@
             display-name = "Nav";
             bindings = <
 &trans &trans &trans &trans &trans &trans  &u_to_U_TAP &u_caps_word &none &none &none &none
-&trans &trans &trans &trans &trans &trans  &kp LBKT &kp LBRC &kp RBRC &kp RBKT &none &trans
-&trans &trans &trans &trans &trans &trans  &kp LEFT &kp DOWN &kp UP &kp RIGHT &none &none
-&trans &trans &trans &trans &trans &trans  &none &none  &kp HOME &kp PG_DN &kp PG_UP &kp END &trans &trans
+&trans &trans &trans &trans &trans &trans  &none &kp LBRC &kp RBRC &none &none &trans
+&trans &trans &trans &trans &trans &trans  &kp LEFT &u_down_pg &u_up_pg &kp RIGHT &none &none
+&trans &trans &trans &trans &trans &trans  &none &none  &kp HOME &kp LBKT &kp RBKT &kp END &trans &trans
 &trans &trans &trans  &none &none  &trans &trans &trans
             >;
         };
@@ -455,17 +509,17 @@
             >;
         };
 
-        /* 10: TMUX — tmux/herdr actions. Hold Tab. Left hand falls through, so
-           typing continues. Trimmed to the herdr actions in use: H/L switch
-           workspace, J/K move between tabs, N opens a tab, P is the picker,
-           U hops, I enters copy mode. */
+        /* 10: TMUX — tmux actions, each Ctrl-b prefix + key. Hold Tab. Left hand
+           falls through, so typing continues. H/J/K/L move between panes,
+           Y splits right (Shift+Y down), I opens a tab (Shift+I closes the
+           pane), B zooms, N/M go to next/previous tab. Everything else is none. */
         TMUX {
             display-name = "Tmux";
             bindings = <
 &trans &trans &trans &trans &trans &trans  &none &none &none &none &none &none
-&trans &trans &trans &trans &trans &trans  &none &tm_hop &tm_copy &none &tm_overview &none
-&trans &trans &trans &trans &trans &trans  &tm_ws_prev &tm_tab_next &tm_tab_prev &tm_ws_next &none &none
-&trans &trans &trans &trans &trans &trans  &none &none  &none &tm_new_tab &none &none &none &none
+&trans &trans &trans &trans &trans &trans  &tm_split &none &tm_new_close &none &none &none
+&trans &trans &trans &trans &trans &trans  &tm_pane_left &tm_pane_down &tm_pane_up &tm_pane_right &none &none
+&trans &trans &trans &trans &trans &trans  &none &none  &tm_zoom &tm_tab_next &tm_tab_prev &none &none &none
 &trans &trans &trans  &none &none  &trans &trans &trans
             >;
         };
