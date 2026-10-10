@@ -228,20 +228,6 @@
             bindings = <&mo>, <&kp>;
         };
 
-        /* Shift already held (e.g. home-row D resolved to LSHFT): tap sends
-           Shift+Tab via LS(TAB) implicit mods; hold activates TMUX_S. Used as
-           the morph side of u_tmux_tab, which masks explicit Shift while Tab
-           is pressed — so hold does not leak host Shift into TMUX macros, while
-           tap still produces Shift+Tab. */
-        u_lt_tmux_s_tab: u_lt_tmux_s_tab {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            require-prior-idle-ms = <120>;
-            flavor = "tap-preferred";
-            bindings = <&mo U_TMUX_S &kp LS(TAB)>;
-        };
-
         /* Tab/TMUX entry. Unshifted: hold TMUX, tap Tab. With Shift already
            held: hold TMUX_S (Shift masked for the hold), tap Shift+Tab via
            LS(TAB). No keep-mods — masking is required to stop D-then-Tab-hold
@@ -249,7 +235,7 @@
         u_tmux_tab: u_tmux_tab {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&u_lt U_TMUX TAB>, <&u_lt_tmux_s_tab>;
+            bindings = <&u_lt U_TMUX TAB>, <&u_lt U_TMUX_S LS(TAB)>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
