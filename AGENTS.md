@@ -28,7 +28,7 @@ The shield and ZMK source come from the vendor tree, not stock ZMK. `config/west
 
 64 positions. Rows 0–3 are 6 + hat + 6. The bottom row is encoder click, five left thumbs, hat click, five right thumbs.
 
-GASC, pinky to index on the left and mirrored on the right. Left mods on the left hand, right mods on the right. `u_mt` is tap-preferred, 250 ms, 120 ms prior-idle. G and H are plain. The outer Shift and Ctrl keys stay. The outer right column, top to bottom, is `-` `=` `'` `\` on Base and Tap (`=` on the r1 key, `'` and `\` on the two keys that used to be bare). Both boards.
+GASC, pinky to index on the left and mirrored on the right. Left mods on the left hand, right mods on the right. `u_mt` is tap-unless-interrupted, 250 ms, 120 ms prior-idle. G and H are plain. The outer Shift and Ctrl keys stay. The outer right column, top to bottom, is `-` `=` `'` `\` on Base and Tap (`=` on the r1 key, `'` and `\` on the two keys that used to be bare). Both boards.
 
 | Finger | Left | Right | Mod |
 |---|---|---|---|
