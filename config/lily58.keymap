@@ -33,7 +33,7 @@
  *
  * TMUX layer (hold Tab): every action is the Ctrl-b prefix plus a key —
  * H/J/K/L panes, Y split right, I new tab, B zoom, N/M next/previous tab.
- * Hold physical Shift while on TMUX for TMUX_S (Y split down, I close pane).
+ * Hold home-row D while on TMUX for TMUX_S (Y split down, I close pane).
  *
  * Clipboard macros send Ctrl.
  */
@@ -499,25 +499,25 @@
         /* 10: TMUX — tmux actions, each Ctrl-b prefix + key. Hold Tab. Left hand
            falls through, so typing continues. H/J/K/L move between panes,
            Y splits right, I opens a tab, B zooms, N/M go to next/previous tab.
-           Hold physical Shift for TMUX_S. Everything else is none. */
+           Hold home-row D for TMUX_S. Everything else is none. */
         TMUX {
             display-name = "Tmux";
             bindings = <
 &trans &trans &trans &trans &trans &trans  &none &none &none &none &none &none
 &trans &trans &trans &trans &trans &trans  &tm_split_right &none &tm_new_tab &none &none &none
-&mo U_TMUX_S &trans &trans &trans &trans &trans  &tm_pane_left &tm_pane_down &tm_pane_up &tm_pane_right &none &none
+&trans &trans &trans &mo U_TMUX_S &trans &trans  &tm_pane_left &tm_pane_down &tm_pane_up &tm_pane_right &none &none
 &trans &trans &trans &trans &trans &trans  &none &none  &tm_zoom &tm_tab_next &tm_tab_prev &none &none &none
 &trans &trans &trans  &none &none  &trans &trans &trans
             >;
         };
 
-        /* 11: TMUX_S — momentary from TMUX via physical Shift; Y split down, I close pane. */
+        /* 11: TMUX_S — momentary from TMUX via home-row D (LSHFT hold); Y split down, I close pane. */
         TMUX_S {
             display-name = "TmuxS";
             bindings = <
 &trans &trans &trans &trans &trans &trans  &none &none &none &none &none &none
 &trans &trans &trans &trans &trans &trans  &tm_split_down &none &tm_close_pane &none &none &none
-&none &trans &trans &trans &trans &trans  &trans &trans &trans &trans &none &none
+&trans &trans &trans &none &trans &trans  &trans &trans &trans &trans &none &none
 &trans &trans &trans &trans &trans &trans  &none &none  &trans &trans &trans &none &none &none
 &trans &trans &trans  &none &none  &trans &trans &trans
             >;

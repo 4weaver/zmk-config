@@ -62,13 +62,13 @@ Thumbs, left outer to inner, then right inner to outer:
 | 8 | Fun | F-keys. Hold Delete. This is the old function layer, not the Eyelash one |
 | 9 | WM | AeroSpace shortcuts. Nothing opens this layer |
 | 10 | Tmux | tmux-style pane/tab actions (Ctrl-b prefix). Hold Tab |
-| 11 | TmuxS | Shift-held TMUX actions (split down / close pane). Hold physical Shift on TMUX |
+| 11 | TmuxS | Shift-held TMUX actions (split down / close pane). Hold home-row D on TMUX |
 | 12 | Eye1 | Vendor lower layer: F-keys, mouse buttons, RGB. Outer right thumb |
 | 13 | Eye2 | Vendor adjust layer: Bluetooth, USB/BLE, reset, bootloader. Outermost right thumb |
 
 The hat sends arrows on Base and Tap, and mouse movement on Mouse, Eye1, and Eye2. Encoder click is mute. Encoder rotation is volume except on Mouse, where it scrolls.
 
-Clipboard macros send Ctrl. TMUX macros send the Ctrl-b prefix as its own tap, then the action key, so they follow tmux defaults. Right hand: H/J/K/L move pane focus left/down/up/right (`C-b h/j/k/l`); Y splits right (`C-b %`); I opens a new tab (`C-b c`); B zooms the pane (`C-b z`); N/M go to the next/previous tab (`C-b n`/`C-b p`). While TMUX is held, the physical Shift key momentarily activates TMUX_S (and does not emit Shift): on TMUX_S, Y splits down (`C-b "`) and I closes the pane (`C-b x`). It works with tmux, herdr, zellij (with tmux bindings), and tern. herdr leaves the two split actions unset, so its `[keys]` config needs `split_vertical = "prefix+%"` and `split_horizontal = "prefix+\""` (see 4weaver/nixdots PR #2); the other keys match its defaults.
+Clipboard macros send Ctrl. TMUX macros send the Ctrl-b prefix as its own tap, then the action key, so they follow tmux defaults. Right hand: H/J/K/L move pane focus left/down/up/right (`C-b h/j/k/l`); Y splits right (`C-b %`); I opens a new tab (`C-b c`); B zooms the pane (`C-b z`); N/M go to the next/previous tab (`C-b n`/`C-b p`). While TMUX is held, home-row D (the Base LSHFT hold) momentarily activates TMUX_S (and does not emit Shift): on TMUX_S, Y splits down (`C-b "`) and I closes the pane (`C-b x`). It works with tmux, herdr, zellij (with tmux bindings), and tern. herdr leaves the two split actions unset, so its `[keys]` config needs `split_vertical = "prefix+%"` and `split_horizontal = "prefix+\""` (see 4weaver/nixdots PR #2); the other keys match its defaults.
 
 On the Nav layer, the Down and Up keys (home row J/K positions) send PgDn and PgUp while Alt is held (the `u_down_pg`/`u_up_pg` mod-morphs; Alt itself is not sent). Without Alt they are plain Down and Up.
 
