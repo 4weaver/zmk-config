@@ -6,7 +6,7 @@ ZMK configuration for an **Eyelash Sofle** (nice!nano v2, Nice!View on both halv
 
 The shield and ZMK source come from the vendor tree, not stock ZMK. `config/west.yml` pins Cormoran's `v0.3-branch+dya` plus that tree's modules, and pulls the shield from [a741725193/zmk-sofle](https://github.com/a741725193/zmk-sofle). Do not copy the shield into this repo.
 
-`config/lily58.keymap` is the Silakka54 (54 keys, built as the upstream `lily58` shield). It is still in use and is built alongside the Sofle. It follows the Sofle's layers 0–10 at the same indices; the header comment lists what did not fit.
+`config/lily58.keymap` is the Silakka54 (54 keys, built as the upstream `lily58` shield). It is still in use and is built alongside the Sofle. It follows the Sofle's layers 0–11 at the same indices (including TMUX_S; no Eye1/Eye2); the header comment lists what did not fit.
 
 ## Repository Structure
 
@@ -62,12 +62,13 @@ Thumbs, left outer to inner, then right inner to outer:
 | 8 | Fun | F-keys. Hold Delete. This is the old function layer, not the Eyelash one |
 | 9 | WM | AeroSpace shortcuts. Nothing opens this layer |
 | 10 | Tmux | tmux-style pane/tab actions (Ctrl-b prefix). Hold Tab |
-| 11 | Eye1 | Vendor lower layer: F-keys, mouse buttons, RGB. Outer right thumb |
-| 12 | Eye2 | Vendor adjust layer: Bluetooth, USB/BLE, reset, bootloader. Outermost right thumb |
+| 11 | TmuxS | Shift-held TMUX actions (split down / close pane). Hold physical Shift on TMUX |
+| 12 | Eye1 | Vendor lower layer: F-keys, mouse buttons, RGB. Outer right thumb |
+| 13 | Eye2 | Vendor adjust layer: Bluetooth, USB/BLE, reset, bootloader. Outermost right thumb |
 
 The hat sends arrows on Base and Tap, and mouse movement on Mouse, Eye1, and Eye2. Encoder click is mute. Encoder rotation is volume except on Mouse, where it scrolls.
 
-Clipboard macros send Ctrl. TMUX macros send the Ctrl-b prefix as its own tap, then the action key, so they follow tmux defaults. Right hand: H/J/K/L move pane focus left/down/up/right (`C-b h/j/k/l`); Y splits right (`C-b %`) and Shift+Y splits down (`C-b "`); I opens a new tab (`C-b c`) and Shift+I closes the pane (`C-b x`); B zooms the pane (`C-b z`); N/M go to the next/previous tab (`C-b n`/`C-b p`). It works with tmux, herdr, zellij (with tmux bindings), and tern. herdr leaves the two split actions unset, so its `[keys]` config needs `split_vertical = "prefix+%"` and `split_horizontal = "prefix+\""` (see 4weaver/nixdots PR #2); the other keys match its defaults.
+Clipboard macros send Ctrl. TMUX macros send the Ctrl-b prefix as its own tap, then the action key, so they follow tmux defaults. Right hand: H/J/K/L move pane focus left/down/up/right (`C-b h/j/k/l`); Y splits right (`C-b %`); I opens a new tab (`C-b c`); B zooms the pane (`C-b z`); N/M go to the next/previous tab (`C-b n`/`C-b p`). While TMUX is held, the physical Shift key momentarily activates TMUX_S (and does not emit Shift): on TMUX_S, Y splits down (`C-b "`) and I closes the pane (`C-b x`). It works with tmux, herdr, zellij (with tmux bindings), and tern. herdr leaves the two split actions unset, so its `[keys]` config needs `split_vertical = "prefix+%"` and `split_horizontal = "prefix+\""` (see 4weaver/nixdots PR #2); the other keys match its defaults.
 
 On the Nav layer, the Down and Up keys (home row J/K positions) send PgDn and PgUp while Alt is held (the `u_down_pg`/`u_up_pg` mod-morphs; Alt itself is not sent). Without Alt they are plain Down and Up.
 

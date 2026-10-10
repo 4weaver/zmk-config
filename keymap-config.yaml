@@ -102,13 +102,8 @@ parse_config:
     "&tm_tab_next": "⇥"
     "&tm_tab_prev": "⇤"
     "&tm_new_tab": "+⇥"
-    # Mod-morphs: tap = normal, s = with Shift (tm_*) / Alt held (u_*_pg)
-    "&tm_split":
-      t: $$mdi:arrow-split-vertical$$
-      s: $$mdi:arrow-split-horizontal$$
-    "&tm_new_close":
-      t: "+⇥"
-      s: $$mdi:close-box-outline$$
+    # TMUX_S (layer 11): hold physical Shift on TMUX — Y=&tm_split_down, I=&tm_close_pane
+    # Mod-morphs: tap = normal, s = Alt held (u_*_pg)
     # NAV: Up/Down, Alt held => PgUp/PgDn
     "&u_up_pg":
       t: $$mdi:arrow-up$$
