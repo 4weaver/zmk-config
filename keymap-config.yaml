@@ -102,7 +102,14 @@ parse_config:
     "&tm_tab_next": "⇥"
     "&tm_tab_prev": "⇤"
     "&tm_new_tab": "+⇥"
-    # TMUX_S (layer 11): hold physical Shift on TMUX — Y=&tm_split_down, I=&tm_close_pane
+    # TMUX_S (layer 11): hold D while TMUX is held, or hold D then hold Tab — Y=&tm_split_down, I=&tm_close_pane
+    # Base Tab is &u_tmux_tab (Shift morph): hold TMUX / tap Tab; shifted hold TMUX_S / tap Shift+Tab
+    "&u_tmux_tab":
+      t: TAB
+      h: TMUX
+      s:
+        t: S-TAB
+        h: TMUX_S
     # Mod-morphs: tap = normal, s = Alt held (u_*_pg)
     # NAV: Up/Down, Alt held => PgUp/PgDn
     "&u_up_pg":
