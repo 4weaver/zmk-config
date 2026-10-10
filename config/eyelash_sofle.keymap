@@ -10,7 +10,7 @@
  *   Enter/Sym, Backspace/Num, Del/Fun, Eyelash 1, Eyelash 2
  *
  * TMUX layer (hold Tab): every action is the Ctrl-b prefix plus a key —
- * H/J/K/L panes, Y split right, I new tab, B zoom, N/M next/previous tab.
+ * H/J/K/L panes (prefix+arrows), Y split right, I new tab, B zoom, N/M next/previous tab.
  * Hold home-row D while on TMUX, or hold D then Tab, for TMUX_S
  * (Y split down, I close pane). Base D+Tab tap remains Shift+Tab.
  *
@@ -117,34 +117,34 @@
            before the action key, so these must never be a three-key chord.
            40/40 is a starting point — if the prefix is swallowed, raise it
            (80–120). */
-        /* Pane focus: prefix+h/j/k/l. */
+        /* Pane focus: prefix+arrows (LEFT/DOWN/UP/RIGHT). Physical H/J/K/L. */
         tm_pane_left: tm_pane_left {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp H>;
+            bindings = <&kp LC(B) &kp LEFT>;
         };
         tm_pane_down: tm_pane_down {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp J>;
+            bindings = <&kp LC(B) &kp DOWN>;
         };
         tm_pane_up: tm_pane_up {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp K>;
+            bindings = <&kp LC(B) &kp UP>;
         };
         tm_pane_right: tm_pane_right {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <40>;
             tap-ms = <40>;
-            bindings = <&kp LC(B) &kp L>;
+            bindings = <&kp LC(B) &kp RIGHT>;
         };
         /* Split right: prefix+% (tmux default; % is Shift+5, LS(N5)). */
         tm_split_right: tm_split_right {
@@ -506,8 +506,8 @@
         };
 
         /* 10: TMUX — tmux actions, each Ctrl-b prefix + key. Hold Tab. Left hand
-           falls through, so typing continues. H/J/K/L move between panes,
-           Y splits right, I opens a tab, B zooms, N/M go to next/previous tab.
+           falls through, so typing continues. H/J/K/L send prefix+arrows for pane
+           focus, Y splits right, I opens a tab, B zooms, N/M go to next/previous tab.
            Hold home-row D for TMUX_S; D then hold Tab also enters TMUX_S. Everything else is none. */
         TMUX {
             display-name = "Tmux";
