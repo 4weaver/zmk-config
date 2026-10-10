@@ -10,8 +10,8 @@
  *   Enter/Sym, Backspace/Num, Del/Fun, Eyelash 1, Eyelash 2
  *
  * TMUX layer (hold Tab): every action is the Ctrl-b prefix plus a key —
- * H/J/K/L panes, Y split right (Shift+Y down), I new tab (Shift+I close
- * pane), B zoom, N/M next/previous tab.
+ * H/J/K/L panes, Y split right, I new tab, B zoom, N/M next/previous tab.
+ * Hold home-row D while on TMUX for TMUX_S (Y split down, I close pane).
  *
  * Clipboard macros send Ctrl, matching the previous Lily58 keymap.
  */
@@ -36,8 +36,9 @@
 #define U_FUN    8
 #define U_WM     9
 #define U_TMUX   10
-#define U_EYE1   11
-#define U_EYE2   12
+#define U_TMUX_S 11
+#define U_EYE1   12
+#define U_EYE2   13
 
 /* ── Mouse defaults ────────────────────────────────────────────── */
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 1250
@@ -271,20 +272,6 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        /* Y = split right (prefix+%); Shift+Y = split down (prefix+"). */
-        tm_split: tm_split {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&tm_split_right>, <&tm_split_down>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-        /* I = new tab (prefix+c); Shift+I = close pane (prefix+x). */
-        tm_new_close: tm_new_close {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&tm_new_tab>, <&tm_close_pane>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
         /* Up, or Page Up while Alt is held (Alt is not sent). */
         u_up_pg: u_up_pg {
             compatible = "zmk,behavior-mod-morph";
@@ -508,21 +495,34 @@
 
         /* 10: TMUX — tmux actions, each Ctrl-b prefix + key. Hold Tab. Left hand
            falls through, so typing continues. H/J/K/L move between panes,
-           Y splits right (Shift+Y down), I opens a tab (Shift+I closes the
-           pane), B zooms, N/M go to next/previous tab. Everything else is none. */
+           Y splits right, I opens a tab, B zooms, N/M go to next/previous tab.
+           Hold home-row D for TMUX_S. Everything else is none. */
         TMUX {
             display-name = "Tmux";
             bindings = <
 &trans &trans &trans &trans &trans &trans  &trans  &none &none &none &none &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &tm_split &none &tm_new_close &none &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &tm_pane_left &tm_pane_down &tm_pane_up &tm_pane_right &none &none
+&trans &trans &trans &trans &trans &trans  &trans  &tm_split_right &none &tm_new_tab &none &none &none
+&trans &trans &trans &mo U_TMUX_S &trans &trans  &trans  &tm_pane_left &tm_pane_down &tm_pane_up &tm_pane_right &none &none
 &trans &trans &trans &trans &trans &trans  &trans  &tm_zoom &tm_tab_next &tm_tab_prev &none &none &none
 &trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        /* 11: stock Eyelash lower layer. Outer right thumb. */
+        /* 11: TMUX_S — momentary from TMUX via home-row D (LSHFT hold); Y split down, I close pane. */
+        TMUX_S {
+            display-name = "TmuxS";
+            bindings = <
+&trans &trans &trans &trans &trans &trans  &trans  &none &none &none &none &none &none
+&trans &trans &trans &trans &trans &trans  &trans  &tm_split_down &none &tm_close_pane &none &none &none
+&trans &trans &trans &none &trans &trans  &trans  &trans &trans &trans &trans &none &none
+&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &none &none &none
+&trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
+            >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        /* 12: stock Eyelash lower layer. Outer right thumb. */
         EYE1 {
             display-name = "Eye1";
             bindings = <
@@ -535,7 +535,7 @@
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        /* 12: stock Eyelash adjust layer. Outermost right thumb. */
+        /* 13: stock Eyelash adjust layer. Outermost right thumb. */
         EYE2 {
             display-name = "Eye2";
             bindings = <
