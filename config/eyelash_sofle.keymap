@@ -239,7 +239,7 @@
             tapping-term-ms = <250>;
             require-prior-idle-ms = <120>;
             flavor = "tap-preferred";
-            bindings = <&mo U_TMUX_S>, <&kp LS(TAB)>;
+            bindings = <&mo U_TMUX_S &kp LS(TAB)>;
         };
 
         /* Tab/TMUX entry. Unshifted: hold TMUX, tap Tab. With Shift already
