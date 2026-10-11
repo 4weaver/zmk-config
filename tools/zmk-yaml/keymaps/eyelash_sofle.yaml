@@ -46,7 +46,7 @@ import: common.yaml
 meta:
   board: eyelash_sofle
   source: "config/eyelash_sofle.keymap"
-  origin_main: "5f995ee"
+  origin_main: "88f22c3"
   matrix_positions: 64
   generated_by: parse.ts
 layout:
@@ -151,7 +151,7 @@ layers:
     rows:
       num:   {L: [none,  none,  none,  none,  none,  none ],  mid: [trans],  R: [none,  none,  none,  none,  none,  none]}
       upper: {L: [none,  U_UND, U_CUT, U_CPY, U_PST, U_RDO],  mid: [trans],  R: [U_RDO, U_PST, U_CPY, U_CUT, U_UND, none]}
-      home:  {L: [none,  LCTRL, LALT,  LCTRL, LSHFT, none ],  mid: [trans],  R: [none,  LSHFT, LCTRL, LALT,  LCTRL, none]}
+      home:  {L: [none,  LGUI,  LALT,  LSHFT, LCTRL, none ],  mid: [trans],  R: [none,  RCTRL, RSHFT, RALT,  RGUI,  none]}
       lower: {L: [none,  U_UND, U_CUT, U_CPY, U_PST, U_RDO],  mid: [trans],  R: [U_RDO, U_PST, U_CPY, U_CUT, U_UND, none]}
       thumb: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [trans, trans, trans, trans, trans]}
   NAV:
@@ -173,7 +173,7 @@ layers:
     rows:
       num:   {L: [none,  none,       none,             none,             none,               none ],  mid: [mmv(MOVE_UP)   ],  R: [none,  none,   none,   none,   none,   none]}
       upper: {L: [none,  bootloader, dance:u_to_U_TAP, none,             dance:u_to_U_BASE,  none ],  mid: [mmv(MOVE_DOWN) ],  R: [U_RDO, U_PST,  U_CPY,  U_CUT,  U_UND,  none]}
-      home:  {L: [none,  LCTRL,      LALT,             LCTRL,            LSHFT,              none ],  mid: [mmv(MOVE_LEFT) ],  R: [none,  U_MS_L, U_MS_D, U_MS_U, U_MS_R, none]}
+      home:  {L: [none,  LGUI,       LALT,             LSHFT,            LCTRL,              none ],  mid: [mmv(MOVE_LEFT) ],  R: [none,  U_MS_L, U_MS_D, U_MS_U, U_MS_R, none]}
       lower: {L: [none,  none,       RALT,             dance:u_to_U_SYM, dance:u_to_U_MOUSE, none ],  mid: [mmv(MOVE_RIGHT)],  R: [none,  U_WH_L, U_WH_D, U_WH_U, U_WH_R, none]}
       thumb: {L: [trans, trans,      trans,            trans,            trans,              trans],  mid: [trans          ],  R: [trans, trans,  trans,  trans,  trans]}
   MEDIA:
@@ -184,7 +184,7 @@ layers:
     rows:
       num:   {L: [none,  studio_unlock, none,             none,             none,               none ],  mid: [trans],  R: [none,            none,             none,             none,             none,             none]}
       upper: {L: [none,  bootloader,    dance:u_to_U_TAP, none,             dance:u_to_U_BASE,  none ],  mid: [trans],  R: [none,            none,             none,             none,             none,             none]}
-      home:  {L: [none,  LCTRL,         LALT,             LCTRL,            LSHFT,              none ],  mid: [trans],  R: [none,            C_PREV,           C_VOL_DN,         C_VOL_UP,         C_NEXT,           none]}
+      home:  {L: [none,  LGUI,          LALT,             LSHFT,            LCTRL,              none ],  mid: [trans],  R: [none,            C_PREV,           C_VOL_DN,         C_VOL_UP,         C_NEXT,           none]}
       lower: {L: [none,  none,          RALT,             dance:u_to_U_FUN, dance:u_to_U_MEDIA, none ],  mid: [trans],  R: [morph:u_out_tog, morph:u_bt_sel_0, morph:u_bt_sel_1, morph:u_bt_sel_2, morph:u_bt_sel_3, none]}
       thumb: {L: [trans, trans,         trans,            trans,            trans,              trans],  mid: [trans],  R: [trans,           trans,            trans,            trans,            trans]}
   NUM:
@@ -195,7 +195,7 @@ layers:
     rows:
       num:   {L: [none,  none,  none,  none,  none,  none ],  mid: [trans],  R: [none,  none,              none,             none,             none,       none]}
       upper: {L: [none,  LBKT,  N7,    N8,    N9,    RBKT ],  mid: [trans],  R: [none,  dance:u_to_U_BASE, none,             dance:u_to_U_TAP, bootloader, none]}
-      home:  {L: [none,  SEMI,  N4,    N5,    N6,    EQUAL],  mid: [trans],  R: [none,  LSHFT,             LCTRL,            LALT,             LCTRL,      none]}
+      home:  {L: [none,  SEMI,  N4,    N5,    N6,    EQUAL],  mid: [trans],  R: [none,  RCTRL,             RSHFT,            RALT,             RGUI,       none]}
       lower: {L: [none,  GRAVE, N1,    N2,    N3,    BSLH ],  mid: [trans],  R: [none,  dance:u_to_U_NUM,  dance:u_to_U_NAV, RALT,             none,       none]}
       thumb: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [trans, trans,             trans,            trans,            trans]}
   SYM:
@@ -217,7 +217,7 @@ layers:
     rows:
       num:   {L: [bootloader, none,  none,  none,  none,  none       ],  mid: [trans],  R: [none,  none,              none,               none,             none,       none]}
       upper: {L: [none,       F12,   F7,    F8,    F9,    PSCRN      ],  mid: [trans],  R: [none,  dance:u_to_U_BASE, none,               dance:u_to_U_TAP, bootloader, none]}
-      home:  {L: [none,       F11,   F4,    F5,    F6,    SLCK       ],  mid: [trans],  R: [none,  LSHFT,             LCTRL,              LALT,             LCTRL,      none]}
+      home:  {L: [none,       F11,   F4,    F5,    F6,    SLCK       ],  mid: [trans],  R: [none,  RCTRL,             RSHFT,              RALT,             RGUI,       none]}
       lower: {L: [none,       F10,   F1,    F2,    F3,    PAUSE_BREAK],  mid: [trans],  R: [none,  dance:u_to_U_FUN,  dance:u_to_U_MEDIA, RALT,             none,       none]}
       thumb: {L: [trans,      trans, trans, trans, trans, trans      ],  mid: [trans],  R: [trans, trans,             trans,              trans,            trans]}
   WM:
