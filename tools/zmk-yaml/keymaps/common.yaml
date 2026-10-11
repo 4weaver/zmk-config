@@ -1,0 +1,233 @@
+# Shared definitions for every board in keymaps/ (macros, hold-taps, mod-morphs, tap-dances,
+# aliases, mouse defaults, banner width). A board file pulls them in with `import: common.yaml`
+# and the value `common` (e.g. `macros: common`, or per entry `tm_zoom: common`).
+# Edit a definition HERE and both keymaps change. Notation: see the header of a board file.
+
+aliases:
+  - title: "Clipboard (Windows)"
+    defs:
+      U_RDO: LC(Y)
+      U_PST: LC(V)
+      U_CPY: LC(C)
+      U_CUT: LC(X)
+      U_UND: LC(Z)
+  - title: "Mouse key aliases"
+    defs:
+      U_BTN1: mkp(MB1)
+      U_BTN2: mkp(MB2)
+      U_BTN3: mkp(MB3)
+      U_MS_D: mmv(MOVE_DOWN)
+      U_MS_L: mmv(MOVE_LEFT)
+      U_MS_R: mmv(MOVE_RIGHT)
+      U_MS_U: mmv(MOVE_UP)
+      U_WH_D: msc(SCRL_DOWN)
+      U_WH_L: msc(SCRL_LEFT)
+      U_WH_R: msc(SCRL_RIGHT)
+      U_WH_U: msc(SCRL_UP)
+
+macros:
+  u_macro_u_bt_sel_0:
+    wait_ms: 0
+    bindings: ["bt(BT_SEL,0)", bt(BT_CLR)]
+  u_macro_u_bt_sel_1:
+    wait_ms: 0
+    bindings: ["bt(BT_SEL,1)", bt(BT_CLR)]
+  u_macro_u_bt_sel_2:
+    wait_ms: 0
+    bindings: ["bt(BT_SEL,2)", bt(BT_CLR)]
+  u_macro_u_bt_sel_3:
+    wait_ms: 0
+    bindings: ["bt(BT_SEL,3)", bt(BT_CLR)]
+  u_macro_u_bt_sel_4:
+    wait_ms: 0
+    bindings: ["bt(BT_SEL,4)", bt(BT_CLR)]
+  tm_pane_left:
+    blank_before: true
+    comments:
+      - |-
+        TMUX layer — tmux actions. Every binding is the Ctrl-b prefix plus
+        one key, sent as two separate taps: tmux wants the prefix RELEASED
+        before the action key, so these must never be a three-key chord.
+        40/40 is a starting point — if the prefix is swallowed, raise it
+        (80–120).
+      - |-
+        Pane focus: prefix+arrows (LEFT/DOWN/UP/RIGHT). Physical H/J/K/L.
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), LEFT]
+  tm_pane_down:
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), DOWN]
+  tm_pane_up:
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), UP]
+  tm_pane_right:
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), RIGHT]
+  tm_split_right:
+    comments: ["Split right: prefix+% (tmux default; % is Shift+5, LS(N5))."]
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), LS(N5)]
+  tm_split_down:
+    comments:
+      - "Split down: prefix+\" (tmux default; \" is Shift+', LS(SQT)). LS is pressed by the macro itself."
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), LS(SQT)]
+  tm_new_tab:
+    comments: ["New tab: prefix+c."]
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), C]
+  tm_close_pane:
+    comments: ["Close pane: prefix+x."]
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), X]
+  tm_zoom:
+    comments: ["Zoom pane: prefix+z."]
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), Z]
+  tm_tab_next:
+    comments: ["Next tab: prefix+n."]
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), "N"]
+  tm_tab_prev:
+    comments: ["Previous tab: prefix+p."]
+    wait_ms: 40
+    tap_ms: 40
+    bindings: [LC(B), P]
+
+hold_taps:
+  mt:
+    node: u_mt
+    comments: ["Home-row mods. Tap-preferred so a roll still types the letter."]
+    tapping_term_ms: 250
+    require_prior_idle_ms: 120
+    flavor: tap-preferred
+    hold: kp
+    tap: kp
+  lt:
+    node: u_lt
+    blank_before: true
+    comments: ["Hold = momentary layer, tap = key."]
+    tapping_term_ms: 250
+    require_prior_idle_ms: 120
+    flavor: tap-preferred
+    hold: mo
+    tap: kp
+
+mod_morphs:
+  u_tmux_tab:
+    blank_before: true
+    comments:
+      - |-
+        Tab/TMUX entry. Unshifted: hold TMUX, tap Tab. With Shift already
+        held: hold TMUX_S (Shift masked for the hold), tap Shift+Tab via
+        LS(TAB). No keep-mods — masking is required to stop D-then-Tab-hold
+        from leaking LSHFT into Ctrl-b macros.
+    normal: "lt(TMUX,TAB)"
+    morphed: "lt(TMUX_S,LS(TAB))"
+    mods: [LSFT, RSFT]
+  u_bt_sel_0:
+    blank_before: true
+    normal: "bt(BT_SEL,0)"
+    morphed: macro:u_macro_u_bt_sel_0
+    mods: [LSFT, RSFT]
+  u_bt_sel_1:
+    normal: "bt(BT_SEL,1)"
+    morphed: macro:u_macro_u_bt_sel_1
+    mods: [LSFT, RSFT]
+  u_bt_sel_2:
+    normal: "bt(BT_SEL,2)"
+    morphed: macro:u_macro_u_bt_sel_2
+    mods: [LSFT, RSFT]
+  u_bt_sel_3:
+    normal: "bt(BT_SEL,3)"
+    morphed: macro:u_macro_u_bt_sel_3
+    mods: [LSFT, RSFT]
+  u_bt_sel_4:
+    normal: "bt(BT_SEL,4)"
+    morphed: macro:u_macro_u_bt_sel_4
+    mods: [LSFT, RSFT]
+  u_out_tog:
+    blank_before: true
+    normal: out(OUT_TOG)
+    morphed: out(OUT_USB)
+    mods: [LSFT, RSFT]
+  u_caps_word:
+    blank_before: true
+    normal: caps_word
+    morphed: CAPS
+    mods: [LSFT, RSFT]
+  u_up_pg:
+    blank_before: true
+    comments: ["Up, or Page Up while Alt is held (Alt is not sent)."]
+    normal: UP
+    morphed: PG_UP
+    mods: [LALT, RALT]
+  u_down_pg:
+    comments: ["Down, or Page Down while Alt is held (Alt is not sent)."]
+    normal: DOWN
+    morphed: PG_DN
+    mods: [LALT, RALT]
+
+tap_dances:
+  u_to_U_BASE:
+    blank_before: true
+    comments: ["Double-tap guards: require a second tap to lock a layer."]
+    tapping_term_ms: 200
+    bindings: [none, to(BASE)]
+  u_to_U_TAP:
+    tapping_term_ms: 200
+    bindings: [none, to(TAP)]
+  u_to_U_BUTTON:
+    tapping_term_ms: 200
+    bindings: [none, to(BUTTON)]
+  u_to_U_NAV:
+    tapping_term_ms: 200
+    bindings: [none, to(NAV)]
+  u_to_U_MOUSE:
+    tapping_term_ms: 200
+    bindings: [none, to(MOUSE)]
+  u_to_U_MEDIA:
+    tapping_term_ms: 200
+    bindings: [none, to(MEDIA)]
+  u_to_U_NUM:
+    tapping_term_ms: 200
+    bindings: [none, to(NUM)]
+  u_to_U_SYM:
+    tapping_term_ms: 200
+    bindings: [none, to(SYM)]
+  u_to_U_FUN:
+    tapping_term_ms: 200
+    bindings: [none, to(FUN)]
+  u_to_U_WM:
+    tapping_term_ms: 200
+    bindings: [none, to(WM)]
+  u_esc_to_base:
+    blank_before: true
+    comments: ["Esc tap, double-tap leaves the Tap layer."]
+    tapping_term_ms: 200
+    bindings: [ESC, to(BASE)]
+
+raw:
+  defines:
+    - "#define ZMK_POINTING_DEFAULT_MOVE_VAL 1250"
+    - "#define ZMK_POINTING_DEFAULT_SCRL_VAL 100"
+  overrides:
+    - |-
+      &mmv {
+          acceleration-exponent = <1>;
+          time-to-max-speed-ms = <1500>;
+          delay-ms = <0>;
+      };
+
+fmt:
+  banner_width: 70
