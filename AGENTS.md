@@ -54,11 +54,11 @@ Thumbs, left outer to inner, then right inner to outer:
 | 0 | Base | QWERTY, GASC, thumb holds above |
 | 1 | Tap | Same letters, no hold-taps. Double-tap Esc returns to Base |
 | 2 | Button | Clipboard and mouse buttons |
-| 3 | Nav | Arrows (HJKL), home/end (B/.), `{ }` on U/I and `[ ]` on N/M; Alt+Down/Up pages. Hold Space |
+| 3 | Nav | Arrows (HJKL), home/end (B/.), `[ ]` on U/I (Shift gives `{ }`), PgUp/PgDn on N/M; Alt+Down/Up pages. Hold Space |
 | 4 | Mouse | Mouse movement and scroll. Encoder scrolls here |
 | 5 | Media | Media keys, Bluetooth profiles, output, bootloader |
-| 6 | Num | Number pad. Hold Backspace |
-| 7 | Sym | Symbols. Hold Enter |
+| 6 | Num | Calculator pad: `*` `/` `0` outer, `789`/`456`/`123` middle, `-` `=` `.` inner (Shift gives `+` `_`). Hold Backspace |
+| 7 | Sym | Symbols, left half only: `) ^ %`, `& # @`, `\` `'` grave, `( $ !`; the middle column is empty. Hold Enter |
 | 8 | Fun | F-keys. Hold Delete. This is the old function layer, not the Eyelash one |
 | 9 | WM | AeroSpace shortcuts. Nothing opens this layer |
 | 10 | Tmux | tmux-style pane/tab actions (Ctrl-b prefix). Hold Tab |
