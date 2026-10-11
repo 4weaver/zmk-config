@@ -24,9 +24,9 @@ export ORIGIN_COMMIT
 ORIGIN_COMMIT=$(git -C "$REPO" rev-parse --short origin/main)
 echo "origin/main = $ORIGIN_COMMIT (repo=$REPO)"
 mkdir -p orig baseline out
-# EXPECT_<board>: optional "LAYER=n,..." of intentional binding-cell diffs vs origin/main.
+# EXPECT_<board>: "LAYER=n,..." of intentional binding-cell diffs vs origin/main (#23).
 # Empty = keymaps/ should match main (tooling branch default after sync).
-declare -A EXPECT=( [eyelash_sofle]="" [lily58]="" )
+declare -A EXPECT=( [eyelash_sofle]="NAV=4,NUM=5,SYM=15" [lily58]="NAV=4,NUM=5,SYM=15" )
 rc=0
 for b in eyelash_sofle lily58; do
   echo "=== $b ==="

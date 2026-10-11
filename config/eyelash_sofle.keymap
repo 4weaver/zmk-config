@@ -419,9 +419,9 @@
             display-name = "Nav";
             bindings = <
 &trans &trans &trans &trans &trans &trans  &trans  &u_to_U_TAP &u_caps_word &none &none &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &none &kp LBRC &kp RBRC &none &none &trans
+&trans &trans &trans &trans &trans &trans  &trans  &none &kp LBKT &kp RBKT &none &none &trans
 &trans &trans &trans &trans &trans &trans  &trans  &kp LEFT &u_down_pg &u_up_pg &kp RIGHT &none &none
-&trans &trans &trans &trans &trans &trans  &trans  &kp HOME &kp LBKT &kp RBKT &kp END &trans &trans
+&trans &trans &trans &trans &trans &trans  &trans  &kp HOME &kp PG_UP &kp PG_DN &kp END &trans &trans
 &trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
@@ -458,9 +458,9 @@
             display-name = "Num";
             bindings = <
 &none &none &none &none &none &none  &trans  &none &none &none &none &none &none
-&none &kp LBKT &kp N7 &kp N8 &kp N9 &kp RBKT  &trans  &none &u_to_U_BASE &none &u_to_U_TAP &bootloader &none
-&none &kp SEMI &kp N4 &kp N5 &kp N6 &kp EQUAL  &trans  &none &kp RCTRL &kp RSHFT &kp RALT &kp RGUI &none
-&none &kp GRAVE &kp N1 &kp N2 &kp N3 &kp BSLH  &trans  &none &u_to_U_NUM &u_to_U_NAV &kp RALT &none &none
+&none &kp ASTRK &kp N7 &kp N8 &kp N9 &kp MINUS  &trans  &none &u_to_U_BASE &none &u_to_U_TAP &bootloader &none
+&none &kp SLASH &kp N4 &kp N5 &kp N6 &kp EQUAL  &trans  &none &kp RCTRL &kp RSHFT &kp RALT &kp RGUI &none
+&none &kp N0 &kp N1 &kp N2 &kp N3 &kp DOT  &trans  &none &u_to_U_NUM &u_to_U_NAV &kp RALT &none &none
 &trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
@@ -471,9 +471,9 @@
             display-name = "Sym";
             bindings = <
 &none &none &none &none &none &none  &trans  &trans &trans &trans &trans &trans &trans
-&trans &none &none &kp ASTRK &kp AMPS &none  &trans  &trans &trans &trans &trans &trans &trans
-&trans &kp DQT &kp CARET &kp PRCNT &kp DLLR &kp PLUS  &trans  &trans &trans &trans &trans &trans &trans
-&trans &kp TILDE &kp HASH &kp AT &kp EXCL &kp PIPE  &trans  &trans &trans &trans &trans &trans &trans
+&trans &kp RPAR &kp AMPS &none &kp BSLH &kp LPAR  &trans  &trans &trans &trans &trans &trans &trans
+&trans &kp CARET &kp HASH &none &kp SQT &kp DLLR  &trans  &trans &trans &trans &trans &trans &trans
+&trans &kp PRCNT &kp AT &none &kp GRAVE &kp EXCL  &trans  &trans &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;

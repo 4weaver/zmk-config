@@ -153,9 +153,9 @@ layers:
     comments: ["NAV — hold Space."]
     rows:
       num:   {L: [trans, trans, trans, trans, trans, trans],  R: [dance:u_to_U_TAP, morph:u_caps_word, none,          none,  none,  none]}
-      upper: {L: [trans, trans, trans, trans, trans, trans],  R: [none,             LBRC,              RBRC,          none,  none,  trans]}
+      upper: {L: [trans, trans, trans, trans, trans, trans],  R: [none,             LBKT,              RBKT,          none,  none,  trans]}
       home:  {L: [trans, trans, trans, trans, trans, trans],  R: [LEFT,             morph:u_down_pg,   morph:u_up_pg, RIGHT, none,  none]}
-      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [none, none],  R: [HOME,             LBKT,              RBKT,          END,   trans, trans]}
+      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [none, none],  R: [HOME,             PG_UP,             PG_DN,         END,   trans, trans]}
       thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans,            trans,             trans]}
   MOUSE:
     index: 4
@@ -183,9 +183,9 @@ layers:
     comments: [NUM]
     rows:
       num:   {L: [none,  none,  none,  none, none, none ],  R: [none,  none,              none,             none,             none,       none]}
-      upper: {L: [none,  LBKT,  N7,    N8,   N9,   RBKT ],  R: [none,  dance:u_to_U_BASE, none,             dance:u_to_U_TAP, bootloader, none]}
-      home:  {L: [none,  SEMI,  N4,    N5,   N6,   EQUAL],  R: [none,  RCTRL,             RSHFT,            RALT,             RGUI,       none]}
-      lower: {L: [none,  GRAVE, N1,    N2,   N3,   BSLH ],  mid: [none, none],  R: [none,  dance:u_to_U_NUM,  dance:u_to_U_NAV, RALT,             none,       none]}
+      upper: {L: [none,  ASTRK, N7,    N8,   N9,   MINUS],  R: [none,  dance:u_to_U_BASE, none,             dance:u_to_U_TAP, bootloader, none]}
+      home:  {L: [none,  SLASH, N4,    N5,   N6,   EQUAL],  R: [none,  RCTRL,             RSHFT,            RALT,             RGUI,       none]}
+      lower: {L: [none,  N0,    N1,    N2,   N3,   DOT  ],  mid: [none, none],  R: [none,  dance:u_to_U_NUM,  dance:u_to_U_NAV, RALT,             none,       none]}
       thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans, trans,             trans]}
   SYM:
     index: 7
@@ -193,9 +193,9 @@ layers:
     comments: [SYM]
     rows:
       num:   {L: [none,  none,  none,  none,  none, none],  R: [trans, trans, trans, trans, trans, trans]}
-      upper: {L: [trans, none,  none,  ASTRK, AMPS, none],  R: [trans, trans, trans, trans, trans, trans]}
-      home:  {L: [trans, DQT,   CARET, PRCNT, DLLR, PLUS],  R: [trans, trans, trans, trans, trans, trans]}
-      lower: {L: [trans, TILDE, HASH,  AT,    EXCL, PIPE],  mid: [none, none],  R: [trans, trans, trans, trans, trans, trans]}
+      upper: {L: [trans, RPAR,  AMPS,  none,  BSLH, LPAR],  R: [trans, trans, trans, trans, trans, trans]}
+      home:  {L: [trans, CARET, HASH,  none,  SQT,  DLLR],  R: [trans, trans, trans, trans, trans, trans]}
+      lower: {L: [trans, PRCNT, AT,    none,  GRAVE, EXCL],  mid: [none, none],  R: [trans, trans, trans, trans, trans, trans]}
       thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans, trans, trans]}
   FUN:
     index: 8

@@ -161,9 +161,9 @@ layers:
     sensor: ["inc_dec_kp(C_VOL_UP,C_VOL_DN)"]
     rows:
       num:   {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [dance:u_to_U_TAP, morph:u_caps_word, none,          none,  none,  none]}
-      upper: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [none,             LBRC,              RBRC,          none,  none,  trans]}
+      upper: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [none,             LBKT,              RBKT,          none,  none,  trans]}
       home:  {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [LEFT,             morph:u_down_pg,   morph:u_up_pg, RIGHT, none,  none]}
-      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [HOME,             LBKT,              RBKT,          END,   trans, trans]}
+      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [HOME,             PG_UP,             PG_DN,         END,   trans, trans]}
       thumb: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [trans,            trans,             trans,         trans, trans]}
   MOUSE:
     index: 4
@@ -194,9 +194,9 @@ layers:
     sensor: ["inc_dec_kp(C_VOL_UP,C_VOL_DN)"]
     rows:
       num:   {L: [none,  none,  none,  none,  none,  none ],  mid: [trans],  R: [none,  none,              none,             none,             none,       none]}
-      upper: {L: [none,  LBKT,  N7,    N8,    N9,    RBKT ],  mid: [trans],  R: [none,  dance:u_to_U_BASE, none,             dance:u_to_U_TAP, bootloader, none]}
-      home:  {L: [none,  SEMI,  N4,    N5,    N6,    EQUAL],  mid: [trans],  R: [none,  RCTRL,             RSHFT,            RALT,             RGUI,       none]}
-      lower: {L: [none,  GRAVE, N1,    N2,    N3,    BSLH ],  mid: [trans],  R: [none,  dance:u_to_U_NUM,  dance:u_to_U_NAV, RALT,             none,       none]}
+      upper: {L: [none,  ASTRK, N7,    N8,    N9,    MINUS],  mid: [trans],  R: [none,  dance:u_to_U_BASE, none,             dance:u_to_U_TAP, bootloader, none]}
+      home:  {L: [none,  SLASH, N4,    N5,    N6,    EQUAL],  mid: [trans],  R: [none,  RCTRL,             RSHFT,            RALT,             RGUI,       none]}
+      lower: {L: [none,  N0,    N1,    N2,    N3,    DOT  ],  mid: [trans],  R: [none,  dance:u_to_U_NUM,  dance:u_to_U_NAV, RALT,             none,       none]}
       thumb: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [trans, trans,             trans,            trans,            trans]}
   SYM:
     index: 7
@@ -205,9 +205,9 @@ layers:
     sensor: ["inc_dec_kp(C_VOL_UP,C_VOL_DN)"]
     rows:
       num:   {L: [none,  none,  none,  none,  none,  none ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
-      upper: {L: [trans, none,  none,  ASTRK, AMPS,  none ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
-      home:  {L: [trans, DQT,   CARET, PRCNT, DLLR,  PLUS ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
-      lower: {L: [trans, TILDE, HASH,  AT,    EXCL,  PIPE ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
+      upper: {L: [trans, RPAR,  AMPS,  none,  BSLH,  LPAR ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
+      home:  {L: [trans, CARET, HASH,  none,  SQT,   DLLR ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
+      lower: {L: [trans, PRCNT, AT,    none,  GRAVE, EXCL ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
       thumb: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [trans, trans, trans, trans, trans]}
   FUN:
     index: 8
