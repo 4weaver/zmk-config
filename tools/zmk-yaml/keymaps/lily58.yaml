@@ -1,0 +1,379 @@
+# lily58.yaml — SOURCE for config/lily58.keymap (generate: deno run -A gen.ts keymaps/lily58.yaml out/lily58.keymap)
+# Shared macros/behaviors/aliases live in common.yaml (imported below).
+#
+# PHYSICAL GRID (58 matrix positions, listed in matrix order; the Silakka54 has 54 keys)
+#   rows : num / upper / home (12 keys each) + lower (14) + thumb (8)
+#   each row = { L: [6 keys, outer -> inner], mid: [...], R: [6 keys, inner -> outer] }
+#   mid  = the matrix slots between the halves that are NOT fitted on the Silakka54 (always
+#          &none on every layer): 2 on the lower row (nofit-lower-l/r) and the innermost thumb
+#          on each side (th-l1 / th-r1). Rows num/upper/home have no mid.
+#   thumb row: L = [th-l4, th-l3, th-l2] (Esc, Space/Nav, Tab/Tmux), mid = [th-l1, th-r1],
+#              R = [th-r2, th-r3, th-r4]  (Enter/Sym, Backspace/Num, Del/Fun)
+#   No hat, no encoder, no Eyelash layers on this board.
+#
+# COORDINATE NAMES (primary key into 'positions'): the key the BASE layer has at that
+#   spot (tap key of hold-taps), lowercased - the SAME names as eyelash_sofle.yaml, so
+#   h / j / k / l / y / i / b / n / m mean the same key on both boards:
+#   letters q w e ..., digits 1..0, symbols `  -  =  ;  '  ,  .  /  \  and tab / lshift / lctrl
+#   for the outer column.  Thumbs are th-l<k>/th-r<k> numbered inner -> outer (physical
+#   position, so Tab/Tmux is th-l2 here but th-l1 on the Sofle, which has 5 thumbs).
+#   NOTE: the base layer has ',' at the lower-middle (3rd) left spot and no ',' on the
+#   right half, so the right lower row is  b n m . / \  (comma is "lost" there).
+#
+# POSITION NAMES  <row>-<column>:  row = num|upper|home|lower|thumb
+#   column = pinky|ring|middle|index|inner;  outermost column on each half = far-<row>-pinky
+#   The same position name exists on both hands; hand is L/R.  Unique key is the coordinate name.
+#   thumb-1 = innermost thumb ... thumb-4 = outermost.
+#
+# BINDING NOTATION
+#   A, N1.. , LS(A), LA(LBKT)   -> &kp ...             trans / none  -> &trans / &none
+#   mo(NAV) to(BASE)            -> &mo U_NAV / &to U_BASE   (layer names, U_<NAME> in the .keymap)
+#   mt(LGUI,A) lt(NAV,SPACE)    -> user hold-taps (hold_taps table; hold arg first, tap arg second)
+#   macro:<name> morph:<name> dance:<name> -> &<name> (macros / mod_morphs / tap_dances tables)
+#   U_UND ...                   -> #define alias (aliases table, verbatim name)
+#   bootloader, studio_unlock.. -> zero-arg behaviors (zero_arg_behaviors list)
+#   anything else name(a,b)     -> &name a b
+#
+# FORMATTING (so that gen.ts reproduces the original file byte-for-byte)
+#   blank_before: true     on a macro / hold-tap / mod-morph / tap-dance = blank line before it
+#   fmt.banner_width       total width of the "/* ── Title ──── */" banner lines
+#   fmt.layer_rows.<LAYER> one pattern per bindings row; every "_" is one binding, the spaces
+#                          between them are copied verbatim (column alignment, extra gap at the hat).
+#                          Edit a cell in 'layers' and the row layout is kept; if a layer's cell
+#                          count changes (or the layer has no pattern) gen.ts falls back to
+#                          auto-aligned columns.
+
+import: common.yaml
+
+meta:
+  board: lily58
+  source: "config/lily58.keymap"
+  origin_main: "88f22c3"
+  matrix_positions: 58
+  generated_by: parse.ts
+layout:
+  num:   {L: ["`",    "1",   "2",   "3", "4", "5"],  R: ["6",   "7",   "8",   "9", "0", "-"]}
+  upper: {L: [tab,    q,     w,     e,   r,   t  ],  R: ["y",   u,     i,     o,   p,   "="]}
+  home:  {L: [lshift, a,     s,     d,   f,   g  ],  R: [h,     j,     k,     l,   ";", "'"]}
+  lower: {L: [lctrl,  z,     x,     ",", c,   v  ],  mid: [nofit-lower-l, nofit-lower-r],  R: [b,     "n",   m,     ".", "/", "\\"]}
+  thumb: {L: [th-l4,  th-l3, th-l2],  mid: [th-l1,         th-r1        ],  R: [th-r2, th-r3, th-r4]}
+positions:
+  "`":         {pos: far-num-pinky,    hand: L, finger: pinky,    row: num,    col: L1,   matrix: 0}
+  "1":         {pos: num-pinky,        hand: L, finger: pinky,    row: num,    col: L2,   matrix: 1}
+  "2":         {pos: num-ring,         hand: L, finger: ring,     row: num,    col: L3,   matrix: 2}
+  "3":         {pos: num-middle,       hand: L, finger: middle,   row: num,    col: L4,   matrix: 3}
+  "4":         {pos: num-index,        hand: L, finger: index,    row: num,    col: L5,   matrix: 4}
+  "5":         {pos: num-inner,        hand: L, finger: index,    row: num,    col: L6,   matrix: 5}
+  "6":         {pos: num-inner,        hand: R, finger: index,    row: num,    col: R1,   matrix: 6}
+  "7":         {pos: num-index,        hand: R, finger: index,    row: num,    col: R2,   matrix: 7}
+  "8":         {pos: num-middle,       hand: R, finger: middle,   row: num,    col: R3,   matrix: 8}
+  "9":         {pos: num-ring,         hand: R, finger: ring,     row: num,    col: R4,   matrix: 9}
+  "0":         {pos: num-pinky,        hand: R, finger: pinky,    row: num,    col: R5,   matrix: 10}
+  "-":         {pos: far-num-pinky,    hand: R, finger: pinky,    row: num,    col: R6,   matrix: 11}
+  tab:         {pos: far-upper-pinky,  hand: L, finger: pinky,    row: upper,  col: L1,   matrix: 12}
+  q:           {pos: upper-pinky,      hand: L, finger: pinky,    row: upper,  col: L2,   matrix: 13}
+  w:           {pos: upper-ring,       hand: L, finger: ring,     row: upper,  col: L3,   matrix: 14}
+  e:           {pos: upper-middle,     hand: L, finger: middle,   row: upper,  col: L4,   matrix: 15}
+  r:           {pos: upper-index,      hand: L, finger: index,    row: upper,  col: L5,   matrix: 16}
+  t:           {pos: upper-inner,      hand: L, finger: index,    row: upper,  col: L6,   matrix: 17}
+  "y":         {pos: upper-inner,      hand: R, finger: index,    row: upper,  col: R1,   matrix: 18}
+  u:           {pos: upper-index,      hand: R, finger: index,    row: upper,  col: R2,   matrix: 19}
+  i:           {pos: upper-middle,     hand: R, finger: middle,   row: upper,  col: R3,   matrix: 20}
+  o:           {pos: upper-ring,       hand: R, finger: ring,     row: upper,  col: R4,   matrix: 21}
+  p:           {pos: upper-pinky,      hand: R, finger: pinky,    row: upper,  col: R5,   matrix: 22}
+  "=":         {pos: far-upper-pinky,  hand: R, finger: pinky,    row: upper,  col: R6,   matrix: 23}
+  lshift:      {pos: far-home-pinky,   hand: L, finger: pinky,    row: home,   col: L1,   matrix: 24}
+  a:           {pos: home-pinky,       hand: L, finger: pinky,    row: home,   col: L2,   matrix: 25}
+  s:           {pos: home-ring,        hand: L, finger: ring,     row: home,   col: L3,   matrix: 26}
+  d:           {pos: home-middle,      hand: L, finger: middle,   row: home,   col: L4,   matrix: 27}
+  f:           {pos: home-index,       hand: L, finger: index,    row: home,   col: L5,   matrix: 28}
+  g:           {pos: home-inner,       hand: L, finger: index,    row: home,   col: L6,   matrix: 29}
+  h:           {pos: home-inner,       hand: R, finger: index,    row: home,   col: R1,   matrix: 30}
+  j:           {pos: home-index,       hand: R, finger: index,    row: home,   col: R2,   matrix: 31}
+  k:           {pos: home-middle,      hand: R, finger: middle,   row: home,   col: R3,   matrix: 32}
+  l:           {pos: home-ring,        hand: R, finger: ring,     row: home,   col: R4,   matrix: 33}
+  ";":         {pos: home-pinky,       hand: R, finger: pinky,    row: home,   col: R5,   matrix: 34}
+  "'":         {pos: far-home-pinky,   hand: R, finger: pinky,    row: home,   col: R6,   matrix: 35}
+  lctrl:       {pos: far-lower-pinky,  hand: L, finger: pinky,    row: lower,  col: L1,   matrix: 36}
+  z:           {pos: lower-pinky,      hand: L, finger: pinky,    row: lower,  col: L2,   matrix: 37}
+  x:           {pos: lower-ring,       hand: L, finger: ring,     row: lower,  col: L3,   matrix: 38}
+  ",":         {pos: lower-middle,     hand: L, finger: middle,   row: lower,  col: L4,   matrix: 39}
+  c:           {pos: lower-index,      hand: L, finger: index,    row: lower,  col: L5,   matrix: 40}
+  v:           {pos: lower-inner,      hand: L, finger: index,    row: lower,  col: L6,   matrix: 41}
+  nofit-lower-l: {pos: nofit-lower-l,    hand: L, finger: inner,    row: lower,  col: M1,   matrix: 42, unfitted: true}
+  nofit-lower-r: {pos: nofit-lower-r,    hand: R, finger: inner,    row: lower,  col: M2,   matrix: 43, unfitted: true}
+  b:           {pos: lower-inner,      hand: R, finger: index,    row: lower,  col: R1,   matrix: 44}
+  "n":         {pos: lower-index,      hand: R, finger: index,    row: lower,  col: R2,   matrix: 45}
+  m:           {pos: lower-middle,     hand: R, finger: middle,   row: lower,  col: R3,   matrix: 46}
+  ".":         {pos: lower-ring,       hand: R, finger: ring,     row: lower,  col: R4,   matrix: 47}
+  "/":         {pos: lower-pinky,      hand: R, finger: pinky,    row: lower,  col: R5,   matrix: 48}
+  "\\":        {pos: far-lower-pinky,  hand: R, finger: pinky,    row: lower,  col: R6,   matrix: 49}
+  th-l4:       {pos: thumb-4,          hand: L, finger: thumb,    row: thumb,  col: L1,   matrix: 50}
+  th-l3:       {pos: thumb-3,          hand: L, finger: thumb,    row: thumb,  col: L2,   matrix: 51}
+  th-l2:       {pos: thumb-2,          hand: L, finger: thumb,    row: thumb,  col: L3,   matrix: 52}
+  th-l1:       {pos: thumb-1,          hand: L, finger: thumb,    row: thumb,  col: M1,   matrix: 53, unfitted: true}
+  th-r1:       {pos: thumb-1,          hand: R, finger: thumb,    row: thumb,  col: M2,   matrix: 54, unfitted: true}
+  th-r2:       {pos: thumb-2,          hand: R, finger: thumb,    row: thumb,  col: R1,   matrix: 55}
+  th-r3:       {pos: thumb-3,          hand: R, finger: thumb,    row: thumb,  col: R2,   matrix: 56}
+  th-r4:       {pos: thumb-4,          hand: R, finger: thumb,    row: thumb,  col: R3,   matrix: 57}
+layers:
+  BASE:
+    index: 0
+    display_name: Base
+    comments: ["BASE — QWERTY, GASC on the home row."]
+    rows:
+      num:   {L: [GRAVE, N1,              N2,               N3,            N4,            N5],  R: [N6,            N7,             N8,            N9,           N0,                 MINUS]}
+      upper: {L: [TAB,   Q,               W,                E,             R,             T ],  R: ["Y",           U,              I,             O,            P,                  EQUAL]}
+      home:  {L: [LSHFT, "mt(LGUI,A)",    "mt(LALT,S)",     "mt(LSHFT,D)", "mt(LCTRL,F)", G ],  R: [H,             "mt(RCTRL,J)",  "mt(RSHFT,K)", "mt(RALT,L)", "mt(RGUI,SEMI)",    SQT]}
+      lower: {L: [LCTRL, Z,               X,                COMMA,         C,             V ],  mid: [none, none],  R: [B,             "N",            M,             DOT,          "lt(BUTTON,SLASH)", BSLH]}
+      thumb: {L: [ESC,   "lt(NAV,SPACE)", morph:u_tmux_tab],  mid: [none, none],  R: ["lt(SYM,RET)", "lt(NUM,BSPC)", "lt(FUN,DEL)"]}
+  TAP:
+    index: 1
+    display_name: Tap
+    comments: ["TAP — same QWERTY letters, no hold-taps. Double-tap Esc returns to Base."]
+    rows:
+      num:   {L: [GRAVE,               N1,    N2,  N3,    N4, N5],  R: [N6,  N7,   N8,  N9,  N0,    MINUS]}
+      upper: {L: [TAB,                 Q,     W,   E,     R,  T ],  R: ["Y", U,    I,   O,   P,     EQUAL]}
+      home:  {L: [LSHFT,               A,     S,   D,     F,  G ],  R: [H,   J,    K,   L,   SEMI,  SQT]}
+      lower: {L: [LCTRL,               Z,     X,   COMMA, C,  V ],  mid: [none, none],  R: [B,   "N",  M,   DOT, SLASH, BSLH]}
+      thumb: {L: [dance:u_esc_to_base, SPACE, TAB],  mid: [none, none],  R: [RET, BSPC, DEL]}
+  BUTTON:
+    index: 2
+    display_name: Button
+    comments: ["BUTTON — clipboard. Thumbs fall through to Base."]
+    rows:
+      num:   {L: [none,  none,  none,  none,  none,  none ],  R: [none,  none,  none,  none,  none,  none]}
+      upper: {L: [none,  U_UND, U_CUT, U_CPY, U_PST, U_RDO],  R: [U_RDO, U_PST, U_CPY, U_CUT, U_UND, none]}
+      home:  {L: [none,  LGUI,  LALT,  LSHFT, LCTRL, none ],  R: [none,  RCTRL, RSHFT, RALT,  RGUI,  none]}
+      lower: {L: [none,  U_UND, U_CUT, U_CPY, U_PST, U_RDO],  mid: [none, none],  R: [U_RDO, U_PST, U_CPY, U_CUT, U_UND, none]}
+      thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans, trans, trans]}
+  NAV:
+    index: 3
+    display_name: Nav
+    comments: ["NAV — hold Space."]
+    rows:
+      num:   {L: [trans, trans, trans, trans, trans, trans],  R: [dance:u_to_U_TAP, morph:u_caps_word, none,          none,  none,  none]}
+      upper: {L: [trans, trans, trans, trans, trans, trans],  R: [none,             LBRC,              RBRC,          none,  none,  trans]}
+      home:  {L: [trans, trans, trans, trans, trans, trans],  R: [LEFT,             morph:u_down_pg,   morph:u_up_pg, RIGHT, none,  none]}
+      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [none, none],  R: [HOME,             LBKT,              RBKT,          END,   trans, trans]}
+      thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans,            trans,             trans]}
+  MOUSE:
+    index: 4
+    display_name: Mouse
+    comments: ["MOUSE — right thumbs are mouse buttons here (Sofle: Eyelash layers)."]
+    rows:
+      num:   {L: [none,  none,       none,             none,             none,               none],  R: [none,   none,   none,   none,   none,   none]}
+      upper: {L: [none,  bootloader, dance:u_to_U_TAP, none,             dance:u_to_U_BASE,  none],  R: [U_RDO,  U_PST,  U_CPY,  U_CUT,  U_UND,  none]}
+      home:  {L: [none,  LGUI,       LALT,             LSHFT,            LCTRL,              none],  R: [none,   U_MS_L, U_MS_D, U_MS_U, U_MS_R, none]}
+      lower: {L: [none,  none,       RALT,             dance:u_to_U_SYM, dance:u_to_U_MOUSE, none],  mid: [none, none],  R: [none,   U_WH_L, U_WH_D, U_WH_U, U_WH_R, none]}
+      thumb: {L: [trans, trans,      trans           ],  mid: [none, none],  R: [U_BTN2, U_BTN1, U_BTN3]}
+  MEDIA:
+    index: 5
+    display_name: Media
+    comments: ["MEDIA — Bluetooth, output, studio unlock. Right thumbs replace the encoder."]
+    rows:
+      num:   {L: [none,  studio_unlock, none,             none,             none,               none],  R: [none,            none,             none,             none,             none,             none]}
+      upper: {L: [none,  bootloader,    dance:u_to_U_TAP, none,             dance:u_to_U_BASE,  none],  R: [none,            none,             none,             none,             none,             none]}
+      home:  {L: [none,  LGUI,          LALT,             LSHFT,            LCTRL,              none],  R: [none,            C_PREV,           C_VOL_DN,         C_VOL_UP,         C_NEXT,           none]}
+      lower: {L: [none,  none,          RALT,             dance:u_to_U_FUN, dance:u_to_U_MEDIA, none],  mid: [none, none],  R: [morph:u_out_tog, morph:u_bt_sel_0, morph:u_bt_sel_1, morph:u_bt_sel_2, morph:u_bt_sel_3, none]}
+      thumb: {L: [trans, trans,         trans           ],  mid: [none, none],  R: [C_STOP,          C_PP,             C_MUTE]}
+  NUM:
+    index: 6
+    display_name: Num
+    comments: [NUM]
+    rows:
+      num:   {L: [none,  none,  none,  none, none, none ],  R: [none,  none,              none,             none,             none,       none]}
+      upper: {L: [none,  LBKT,  N7,    N8,   N9,   RBKT ],  R: [none,  dance:u_to_U_BASE, none,             dance:u_to_U_TAP, bootloader, none]}
+      home:  {L: [none,  SEMI,  N4,    N5,   N6,   EQUAL],  R: [none,  RCTRL,             RSHFT,            RALT,             RGUI,       none]}
+      lower: {L: [none,  GRAVE, N1,    N2,   N3,   BSLH ],  mid: [none, none],  R: [none,  dance:u_to_U_NUM,  dance:u_to_U_NAV, RALT,             none,       none]}
+      thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans, trans,             trans]}
+  SYM:
+    index: 7
+    display_name: Sym
+    comments: [SYM]
+    rows:
+      num:   {L: [none,  none,  none,  none,  none, none],  R: [trans, trans, trans, trans, trans, trans]}
+      upper: {L: [trans, none,  none,  ASTRK, AMPS, none],  R: [trans, trans, trans, trans, trans, trans]}
+      home:  {L: [trans, DQT,   CARET, PRCNT, DLLR, PLUS],  R: [trans, trans, trans, trans, trans, trans]}
+      lower: {L: [trans, TILDE, HASH,  AT,    EXCL, PIPE],  mid: [none, none],  R: [trans, trans, trans, trans, trans, trans]}
+      thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans, trans, trans]}
+  FUN:
+    index: 8
+    display_name: Fun
+    comments: ["FUN — held on Delete."]
+    rows:
+      num:   {L: [bootloader, none,  none,  none, none, none       ],  R: [none,  none,              none,               none,             none,       none]}
+      upper: {L: [none,       F12,   F7,    F8,   F9,   PSCRN      ],  R: [none,  dance:u_to_U_BASE, none,               dance:u_to_U_TAP, bootloader, none]}
+      home:  {L: [none,       F11,   F4,    F5,   F6,   SLCK       ],  R: [none,  RCTRL,             RSHFT,              RALT,             RGUI,       none]}
+      lower: {L: [none,       F10,   F1,    F2,   F3,   PAUSE_BREAK],  mid: [none, none],  R: [none,  dance:u_to_U_FUN,  dance:u_to_U_MEDIA, RALT,             none,       none]}
+      thumb: {L: [trans,      trans, trans],  mid: [none, none],  R: [trans, trans,             trans]}
+  WM:
+    index: 9
+    display_name: WM
+    comments: ["WM — AeroSpace. No key opens this layer yet."]
+    rows:
+      num:   {L: [none,  none,      none,   none,   none,   none     ],  R: [none,  none,    none,             none,      none,  none]}
+      upper: {L: [none,  LA(LBKT),  LA(N7), LA(N8), LA(N9), LA(RBKT) ],  R: [none,  LA(DOT), LA(N0),           LA(MINUS), none,  none]}
+      home:  {L: [none,  LA(SEMI),  LA(N4), LA(N5), LA(N6), LA(EQUAL)],  R: [none,  LA(H),   LA(J),            LA(K),     LA(L), none]}
+      lower: {L: [none,  LA(GRAVE), LA(N1), LA(N2), LA(N3), LA(BSLH) ],  mid: [none, none],  R: [none,  LA(ESC), dance:u_to_U_NAV, RALT,      none,  none]}
+      thumb: {L: [trans, trans,     trans ],  mid: [none, none],  R: [trans, trans,   trans]}
+  TMUX:
+    index: 10
+    display_name: Tmux
+    comments:
+      - |-
+        TMUX — tmux actions, each Ctrl-b prefix + key. Hold Tab. Left hand
+        falls through, so typing continues. H/J/K/L send prefix+arrows for pane
+        focus, Y splits right, I opens a tab, B zooms, N/M go to next/previous tab.
+        Hold home-row D for TMUX_S; D then hold Tab also enters TMUX_S. Everything else is none.
+    rows:
+      num:   {L: [trans, trans, trans, trans,      trans, trans],  R: [none,                 none,               none,              none,                none, none]}
+      upper: {L: [trans, trans, trans, trans,      trans, trans],  R: [macro:tm_split_right, none,               macro:tm_new_tab,  none,                none, none]}
+      home:  {L: [trans, trans, trans, mo(TMUX_S), trans, trans],  R: [macro:tm_pane_left,   macro:tm_pane_down, macro:tm_pane_up,  macro:tm_pane_right, none, none]}
+      lower: {L: [trans, trans, trans, trans,      trans, trans],  mid: [none, none],  R: [macro:tm_zoom,        macro:tm_tab_next,  macro:tm_tab_prev, none,                none, none]}
+      thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans,                trans,              trans]}
+  TMUX_S:
+    index: 11
+    display_name: TmuxS
+    comments: ["TMUX_S — from TMUX via home-row D, or D-then-Tab hold; Y split down, I close pane."]
+    rows:
+      num:   {L: [trans, trans, trans, trans, trans, trans],  R: [none,                none,  none,                none,  none, none]}
+      upper: {L: [trans, trans, trans, trans, trans, trans],  R: [macro:tm_split_down, none,  macro:tm_close_pane, none,  none, none]}
+      home:  {L: [trans, trans, trans, none,  trans, trans],  R: [trans,               trans, trans,               trans, none, none]}
+      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [none, none],  R: [trans,               trans, trans,               none,  none, none]}
+      thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans,               trans, trans]}
+aliases: common
+macros: common
+hold_taps: common
+mod_morphs: common
+tap_dances: common
+zero_arg_behaviors: [caps_word, bootloader, studio_unlock]
+raw:
+  header: |-
+    /*
+     * Silakka54 (built as the upstream ZMK lily58 shield) — QWERTY, GASC
+     * home-row mods. Mirrors config/eyelash_sofle.keymap: same layers 0–11 at
+     * the same indices (including TMUX_S), same behaviors and macros, same
+     * bindings wherever the key exists on this board.
+     *
+     * lily58 matrix, 58 positions per layer:
+     *   Rows 0–2: 6 left + 6 right = 12
+     *   Row 3:    6 left + 2 inner + 6 right = 14
+     *   Row 4:    4 left thumbs + 4 right thumbs = 8
+     * Silakka54 has 54 keys. The 2 inner row-3 keys and the innermost thumb on
+     * each side are not fitted, so those 4 slots are &none on every layer.
+     *
+     * Thumbs, left outer→inner, then right inner→outer:
+     *   Esc, Space/Nav, Tab/Tmux, (missing) | (missing), Enter/Sym, Backspace/Num, Del/Fun
+     *
+     * Tradeoffs against the Sofle (64 keys, encoder, 5-way hat, 5 thumbs a side):
+     *   - Hat column (arrows on Base/Tap, mouse move on Mouse/Eye*, hat click):
+     *     dropped. Arrows are on Nav (hold Space); mouse movement is on Mouse.
+     *   - Encoder (click = mute, rotate = volume, scroll on Mouse): dropped.
+     *     Volume is on Media's right home row; Media's right thumbs are
+     *     Stop / Play-Pause / Mute (from the old Lily58 keymap).
+     *   - Two spare (&none) left outer thumbs: dropped. Esc, Space/Nav and
+     *     Tab/Tmux keep their Sofle order on the three fitted left thumbs.
+     *   - Eyelash 1 / Eyelash 2 thumbs and Sofle layers 12–13 (vendor F-keys, RGB,
+     *     mouse clicks, BT, reset): dropped; this board has no thumb for them
+     *     and no RGB. F-keys are on Fun, BT/output on Media, bootloader on
+     *     Fun/Num/Mouse/Media.
+     *   - Mouse clicks came from the Eyelash layers on the Sofle. Here Mouse's
+     *     right thumbs are Button 2 / Button 1 / Button 3 (from the old Lily58
+     *     keymap) so the mouse layer is usable without them.
+     *   - No sensor-bindings on any layer (no encoder enabled on this build).
+     *
+     * TMUX layer (hold Tab): every action is the Ctrl-b prefix plus a key —
+     * H/J/K/L panes (prefix+arrows), Y split right, I new tab, B zoom, N/M next/previous tab.
+     * Hold home-row D while on TMUX, or hold D then Tab, for TMUX_S
+     * (Y split down, I close pane). Base D+Tab tap remains Shift+Tab.
+     *
+     * Clipboard macros send Ctrl.
+     */
+
+    #include <behaviors.dtsi>
+    #include <behaviors/mouse_keys.dtsi>
+    #include <dt-bindings/zmk/keys.h>
+    #include <dt-bindings/zmk/bt.h>
+    #include <dt-bindings/zmk/outputs.h>
+    #include <dt-bindings/zmk/pointing.h>
+  defines: common
+  overrides: common
+  root_nodes: []
+  behavior_nodes: []
+  macro_nodes: []
+fmt:
+  banner_width: common
+  layer_rows:
+    BASE:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    TAP:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    BUTTON:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    NAV:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    MOUSE:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    MEDIA:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    NUM:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    SYM:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    FUN:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    WM:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    TMUX:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"
+    TMUX_S:
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _ _ _ _ _"
+      - "_ _ _ _ _ _  _ _  _ _ _ _ _ _"
+      - "_ _ _  _ _  _ _ _"

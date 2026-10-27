@@ -8,6 +8,10 @@ The shield and ZMK source come from the vendor tree, not stock ZMK. `config/west
 
 `config/lily58.keymap` is the Silakka54 (54 keys, built as the upstream `lily58` shield). It is still in use and is built alongside the Sofle. It follows the Sofle's layers 0–11 at the same indices (including TMUX_S; no Eye1/Eye2); the header comment lists what did not fit.
 
+## YAML keymap tooling
+
+Editable YAML sources and Deno parse/gen live under `tools/zmk-yaml/` (see that directory's README). Round-trip check: `bash tools/zmk-yaml/run.sh`. Production `config/*.keymap` is unchanged until you copy regenerated output in.
+
 ## Repository Structure
 
 ```
