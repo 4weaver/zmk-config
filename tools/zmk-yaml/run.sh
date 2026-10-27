@@ -27,7 +27,7 @@ mkdir -p orig baseline out
 # EXPECT_<board>: optional "LAYER=n,..." of intentional binding-cell diffs vs origin/main.
 # Empty = keymaps/ should match main.
 # Empty = keymaps/ should match main (tooling branch default after sync).
-declare -A EXPECT=( [eyelash_sofle]="" [lily58]="" )
+declare -A EXPECT=( [eyelash_sofle]="SYM=29" [lily58]="SYM=29" )
 rc=0
 for b in eyelash_sofle lily58; do
   echo "=== $b ==="

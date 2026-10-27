@@ -201,13 +201,13 @@ layers:
   SYM:
     index: 7
     display_name: Sym
-    comments: [SYM]
+    comments: ["SYM — bilateral 3x5 freeze (hold Enter)"]
     sensor: ["inc_dec_kp(C_VOL_UP,C_VOL_DN)"]
     rows:
       num:   {L: [none,  none,  none,  none,  none,  none ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
-      upper: {L: [trans, none,  none,  ASTRK, AMPS,  none ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
-      home:  {L: [trans, DQT,   CARET, PRCNT, DLLR,  PLUS ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
-      lower: {L: [trans, TILDE, HASH,  AT,    EXCL,  PIPE ],  mid: [trans],  R: [trans, trans, trans, trans, trans, trans]}
+      upper: {L: [trans, GRAVE, TILDE, HASH,  AMPS,  PIPE ],  mid: [trans],  R: [SLASH, LBRC, RBRC, LBKT, RBKT, trans]}
+      home:  {L: [trans, EXCL,  UNDER, COLON, EQUAL, DLLR ],  mid: [trans],  R: [CARET, LPAR, RPAR, UNDER, SEMI,  trans]}
+      lower: {L: [trans, PRCNT, QMARK, ASTRK, PLUS,  BSLH ],  mid: [trans],  R: [LESS,  MINUS, GREATER, DQT, AT,   trans]}
       thumb: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [trans, trans, trans, trans, trans]}
   FUN:
     index: 8

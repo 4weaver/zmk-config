@@ -466,14 +466,14 @@
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        /* 7: SYM */
+        /* 7: SYM — bilateral 3x5 freeze (hold Enter) */
         SYM {
             display-name = "Sym";
             bindings = <
 &none &none &none &none &none &none  &trans  &trans &trans &trans &trans &trans &trans
-&trans &none &none &kp ASTRK &kp AMPS &none  &trans  &trans &trans &trans &trans &trans &trans
-&trans &kp DQT &kp CARET &kp PRCNT &kp DLLR &kp PLUS  &trans  &trans &trans &trans &trans &trans &trans
-&trans &kp TILDE &kp HASH &kp AT &kp EXCL &kp PIPE  &trans  &trans &trans &trans &trans &trans &trans
+&trans &kp GRAVE &kp TILDE &kp HASH &kp AMPS &kp PIPE  &trans  &kp SLASH &kp LBRC &kp RBRC &kp LBKT &kp RBKT &trans
+&trans &kp EXCL &kp UNDER &kp COLON &kp EQUAL &kp DLLR  &trans  &kp CARET &kp LPAR &kp RPAR &kp UNDER &kp SEMI &trans
+&trans &kp PRCNT &kp QMARK &kp ASTRK &kp PLUS &kp BSLH  &trans  &kp LESS &kp MINUS &kp GREATER &kp DQT &kp AT &trans
 &trans &trans &trans &trans &trans &trans  &trans  &trans &trans &trans &trans &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;

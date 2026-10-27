@@ -190,12 +190,12 @@ layers:
   SYM:
     index: 7
     display_name: Sym
-    comments: [SYM]
+    comments: ["SYM — bilateral 3x5 freeze (hold Enter)"]
     rows:
       num:   {L: [none,  none,  none,  none,  none, none],  R: [trans, trans, trans, trans, trans, trans]}
-      upper: {L: [trans, none,  none,  ASTRK, AMPS, none],  R: [trans, trans, trans, trans, trans, trans]}
-      home:  {L: [trans, DQT,   CARET, PRCNT, DLLR, PLUS],  R: [trans, trans, trans, trans, trans, trans]}
-      lower: {L: [trans, TILDE, HASH,  AT,    EXCL, PIPE],  mid: [none, none],  R: [trans, trans, trans, trans, trans, trans]}
+      upper: {L: [trans, GRAVE, TILDE, HASH,  AMPS, PIPE],  R: [SLASH, LBRC, RBRC, LBKT, RBKT, trans]}
+      home:  {L: [trans, EXCL,  UNDER, COLON, EQUAL, DLLR],  R: [CARET, LPAR, RPAR, UNDER, SEMI,  trans]}
+      lower: {L: [trans, PRCNT, QMARK, ASTRK, PLUS,  BSLH],  mid: [none, none],  R: [LESS,  MINUS, GREATER, DQT, AT,   trans]}
       thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans, trans, trans]}
   FUN:
     index: 8

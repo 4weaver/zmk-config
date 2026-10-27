@@ -62,7 +62,7 @@ Thumbs, left outer to inner, then right inner to outer:
 | 4 | Mouse | Mouse movement and scroll. Encoder scrolls here |
 | 5 | Media | Media keys, Bluetooth profiles, output, bootloader |
 | 6 | Num | Number pad. Hold Backspace |
-| 7 | Sym | Symbols. Hold Enter |
+| 7 | Sym | Bilateral 3×5 symbol grid (ShelZuuz-based freeze). Hold Enter |
 | 8 | Fun | F-keys. Hold Delete. This is the old function layer, not the Eyelash one |
 | 9 | WM | AeroSpace shortcuts. Nothing opens this layer |
 | 10 | Tmux | tmux-style pane/tab actions (Ctrl-b prefix). Hold Tab |
