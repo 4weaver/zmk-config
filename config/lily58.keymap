@@ -479,7 +479,7 @@
 &none &none &none &none &none &none  &trans &trans &trans &trans &trans &trans
 &trans &kp GRAVE &kp TILDE &kp HASH &kp AMPS &kp PIPE  &kp SLASH &kp LBRC &kp RBRC &kp LBKT &kp RBKT &trans
 &trans &kp EXCL &kp UNDER &kp COLON &kp EQUAL &kp DLLR  &kp CARET &kp LPAR &kp RPAR &kp UNDER &kp SEMI &trans
-&trans &kp PRCNT &kp QMARK &kp ASTRK &kp PLUS &kp BSLH  &none &none  &kp LESS &kp MINUS &kp GREATER &kp DQT &kp AT &trans
+&trans &kp PRCNT &kp QMARK &kp ASTRK &kp PLUS &kp BSLH  &none &none  &kp LT &kp MINUS &kp GT &kp DQT &kp AT &trans
 &trans &trans &trans  &none &none  &trans &trans &trans
             >;
         };
