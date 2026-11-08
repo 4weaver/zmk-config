@@ -153,9 +153,9 @@ layers:
     comments: ["NAV — hold Space."]
     rows:
       num:   {L: [trans, trans, trans, trans, trans, trans],  R: [dance:u_to_U_TAP, morph:u_caps_word, none,          none,  none,  none]}
-      upper: {L: [trans, trans, trans, trans, trans, trans],  R: [none,             LBRC,              RBRC,          none,  none,  trans]}
+      upper: {L: [trans, trans, trans, trans, trans, trans],  R: [none,             LBKT,              RBKT,          none,  none,  trans]}
       home:  {L: [trans, trans, trans, trans, trans, trans],  R: [LEFT,             morph:u_down_pg,   morph:u_up_pg, RIGHT, none,  none]}
-      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [none, none],  R: [HOME,             LBKT,              RBKT,          END,   trans, trans]}
+      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [none, none],  R: [HOME,             PG_DN,             PG_UP,         END,   trans, trans]}
       thumb: {L: [trans, trans, trans],  mid: [none, none],  R: [trans,            trans,             trans]}
   MOUSE:
     index: 4

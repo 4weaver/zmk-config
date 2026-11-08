@@ -161,9 +161,9 @@ layers:
     sensor: ["inc_dec_kp(C_VOL_UP,C_VOL_DN)"]
     rows:
       num:   {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [dance:u_to_U_TAP, morph:u_caps_word, none,          none,  none,  none]}
-      upper: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [none,             LBRC,              RBRC,          none,  none,  trans]}
+      upper: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [none,             LBKT,              RBKT,          none,  none,  trans]}
       home:  {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [LEFT,             morph:u_down_pg,   morph:u_up_pg, RIGHT, none,  none]}
-      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [HOME,             LBKT,              RBKT,          END,   trans, trans]}
+      lower: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [HOME,             PG_DN,             PG_UP,         END,   trans, trans]}
       thumb: {L: [trans, trans, trans, trans, trans, trans],  mid: [trans],  R: [trans,            trans,             trans,         trans, trans]}
   MOUSE:
     index: 4
